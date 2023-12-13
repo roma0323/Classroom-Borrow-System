@@ -10,8 +10,8 @@
     <label for="category">Category:</label>
     <input type="text" id="category" name="category"  required><br><br>
 
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name"  required><br><br>
+    <label for="description">description:</label>
+    <input type="text" id="description" name="description"  required><br><br>
 
     <label for="label">Label:</label>
     <input type="text" id="label" name="label"  required><br><br>
@@ -25,7 +25,7 @@
     <tr>
         <th>ID</th>
         <th>Category</th>
-        <th>Name</th>
+        <th>description</th>
         <th>Label</th>
         <!-- Add more columns based on your entity fields -->
     </tr>
@@ -34,7 +34,7 @@
     <tr th:each="equipment : ${equipmentList}">
         <td th:text="${equipment.id_equipment}"></td>
         <td th:text="${equipment.category}"></td>
-        <td th:text="${equipment.name}"></td>
+        <td th:text="${equipment.description}"></td>
         <td th:text="${equipment.label}"></td>
         <td>
             <form th:action="@{/equipment/editEquipment}" method="get">

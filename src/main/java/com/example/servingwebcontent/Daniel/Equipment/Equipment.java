@@ -19,13 +19,13 @@ public class Equipment {
     @Column(name = "id_equipment")
     private long id_equipment;
     private String category;
-    private String name;
+    private String description;
     private String label;
 
-    public Equipment(long id_equipment, String category, String name, String label) {
+    public Equipment(long id_equipment, String category, String description, String label) {
         this.id_equipment = id_equipment;
         this.category = category;
-        this.name = name;
+        this.description = description;
         this.label = label;
     }
 
@@ -49,12 +49,12 @@ public class Equipment {
         this.category = category;
     }
 
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLabel() {
@@ -70,7 +70,7 @@ public class Equipment {
         return "Equipment{" +
                 "id=" + id_equipment +
                 ", category='" + category + '\'' +
-                ", name='" + name + '\'' +
+                ", name='" + description + '\'' +
                 ", label='" + label + '\'' +
                 '}';
     }
