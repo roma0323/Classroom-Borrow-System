@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="/equipment/addNewEquipment" method="post"  th:object="${newEquipment}">
+<form action="/booking/addNewEquipment" method="post"  th:object="${newBooking}">
     <label for="category">Category:</label>
     <input type="text" id="category" name="category"  required><br><br>
 
@@ -31,18 +31,18 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="equipment : ${equipmentList}">
-        <td th:text="${equipment.id_equipment}"></td>
-        <td th:text="${equipment.category}"></td>
-        <td th:text="${equipment.description}"></td>
-        <td th:text="${equipment.label}"></td>
+    <tr th:each="booking : ${equipmentList}">
+        <td th:text="${booking.id_equipment}"></td>
+        <td th:text="${booking.category}"></td>
+        <td th:text="${booking.description}"></td>
+        <td th:text="${booking.label}"></td>
         <td>
-            <form th:action="@{/equipment/editEquipment}" method="get">
-                <input type="hidden" name="equipmentId" th:value="${equipment.id_equipment}">
+            <form th:action="@{/booking/editEquipment}" method="get">
+                <input type="hidden" name="equipmentId" th:value="${booking.id_equipment}">
                 <button type="submit">Edit</button>
             </form>
-            <form th:action="@{/equipment/deleteEquipment}" method="post">
-                <input type="hidden" name="equipmentId" th:value="${equipment.id_equipment}">
+            <form th:action="@{/booking/deleteEquipment}" method="post">
+                <input type="hidden" name="equipmentId" th:value="${booking.id_equipment}">
                 <button type="submit">Delete</button>
             </form>
             <br>
