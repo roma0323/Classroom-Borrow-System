@@ -1,0 +1,55 @@
+<!-- src/main/resources/templates/Daniel/findAllEquipment.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Classroom</title>
+</head>
+<body>
+
+<form action="/classroom/addNewClassroom" method="post"  th:object="${newClassroom}">
+    <label for="name">name:</label>
+    <input type="text" id="name" name="name"  required><br><br>
+
+    <label for="description">description:</label>
+    <input type="text" id="description" name="description"  required><br><br>
+
+    <label for="image">image:</label>
+    <input type="file" id="image" name="image" required><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+<h2>All Classroom</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>name</th>
+        <th>description</th>
+        <th>image</th>
+        <!-- Add more columns based on your entity fields -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="classroom : ${classroomList}">
+        <td th:text="${classroom.idClassroom}"></td>
+        <td th:text="${classroom.name}"></td>
+        <td th:text="${classroom.description}"></td>
+
+        <td>
+            <form th:action="@{/classroom/delete}" method="post">
+                <input type="hidden" name="classroomId" th:value="${classroom.idClassroom}">
+                <button type="submit">Delete</button>
+            </form>
+            <br>
+        </td>
+
+        <!-- Add more cells based on your entity fields -->
+    </tr>
+
+
+    </tbody>
+</table>
+<img th:src="@{/Daniel/image/I1_002.jpg}"/>
+</body>
+</html>
