@@ -30,4 +30,13 @@ public class EquipmentService {
     public Optional<Equipment> findById(Long equipmentId){
         return equipmentRepository.findById(equipmentId);
     }
+
+    public List<Equipment> findByCategory(String category) {
+        return equipmentRepository.findByCategory(category);
+    }
+
+    public List<String> findDistinctCategories() {
+        return equipmentRepository.findDistinctCategories();
+    }
+
 }
