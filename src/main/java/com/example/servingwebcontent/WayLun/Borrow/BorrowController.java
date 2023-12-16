@@ -40,7 +40,7 @@ public class BorrowController {
     @PostMapping("/addNewBorrow")
     public String addNewBorrow(Borrow newBorrow) {
         borrowService.save(newBorrow);
-        return "redirect:/borrow/Borrow";
+        return "redirect:/borrow/findAll";
     }
 
     @GetMapping("/editBorrow")
@@ -66,7 +66,7 @@ public class BorrowController {
 
     @GetMapping("/details/{id}")
     public ModelAndView showBorrowDetails(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("WayLun/borrowDetails");
+        ModelAndView modelAndView = new ModelAndView("WayLun/BorrowDetails");
 
         Optional<Borrow> optionalBorrow = borrowService.findById(id);
         Borrow borrow = optionalBorrow.orElse(null);

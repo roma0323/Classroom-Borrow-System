@@ -9,7 +9,7 @@
 
 <h2>目前被租借教室和設備</h2>
 
-<table border="1">
+<table>
     <thead>
     <tr>
         <th>租借者姓名</th>
@@ -19,7 +19,7 @@
     </thead>
     <tbody>
     <!-- 這裡需要使用Thymeleaf的樣板語言，將後端資料注入到HTML中 -->
-    <tr th:each="borrow : ${borrowlist}">
+    <tr th:each="borrow : ${borrowList}">
         <td th:text="${borrow.name}"></td>
         <td th:text="${borrow.id_borrow}"></td>
         <td>

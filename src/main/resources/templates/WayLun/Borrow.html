@@ -9,7 +9,7 @@
 
 <h2>租借申請</h2>
 
-<form action="/borrow/addNewBorrow" method="post">
+<form action="/borrow/addNewBorrow" method="post" th:object="${newBorrow}">
     <label for="name">姓名：</label>
     <input type="text" id="name" name="name" required><br>
 
@@ -24,6 +24,12 @@
 
     <label for="identityCard">抵用證件：</label>
     <input type="text" id="identityCard" name="identityCard" required><br>
+
+    <label for="departmentGrade">部門/年級：</label>
+    <input type="text" id="departmentGrade" name="departmentGrade" required><br>
+
+    <label for="status">狀態：</label>
+    <input type="text" id="status" name="status" required><br>
 
     <input type="submit" value="提交">
 </form>
