@@ -20,6 +20,17 @@
 </form>
 
 <h2>All Equipment</h2>
+    <!--Search-->
+
+<form action="/equipment/searchByCategory" method="get">
+    <select name="category">
+        <option value="">--Select a Category--</option>
+        <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
+    </select>
+    <input type="submit" value="Search"/>
+</form>
+
+
 <table>
     <thead>
     <tr>
