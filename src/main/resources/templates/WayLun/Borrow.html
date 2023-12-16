@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>租借申請</title>
+</head>
+<body>
+
+<h2>租借申請</h2>
+
+<form action="/borrow/addNewBorrow" method="post">
+    <label for="name">姓名：</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="identity">身分：</label>
+    <input type="text" id="identity" name="identity" required><br>
+
+    <label for="phone">手機號碼：</label>
+    <input type="tel" id="phone" name="phone" required><br>
+
+    <label for="email">Email：</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="identityCard">抵用證件：</label>
+    <input type="text" id="identityCard" name="identityCard" required><br>
+
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>

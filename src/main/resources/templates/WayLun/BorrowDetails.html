@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>租借詳細資料</title>
+</head>
+<body>
+<h2>租借詳細資料</h2>
+<table>
+    <tr>
+        <th>租借者姓名</th>
+        <th>租借ID</th>
+        <!-- Add more columns as needed -->
+    </tr>
+    <tr>
+        <td th:text="${borrow.name}"></td>
+        <td th:text="${borrow.id_borrow}"></td>
+        <!-- Add more cells as needed -->
+    </tr>
+</table>
+
+<!-- Add more details as needed -->
+<p>其他詳細資料：...</p>
+
+<a th:href="@{/borrow/findAll}">返回租借列表</a>
+</body>
+</html>
