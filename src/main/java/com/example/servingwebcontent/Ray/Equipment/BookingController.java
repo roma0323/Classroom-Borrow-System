@@ -27,18 +27,21 @@ public class BookingController {
 
     @GetMapping("/findAll")
     public ModelAndView findAll() {
-        ModelAndView modelAndView = new ModelAndView("Daniel/findAllEquipment");
+        ModelAndView modelAndView = new ModelAndView("Ray/findAllBooking");
 
         // Retrieve data from MySQL and add it to the model
-        Iterable<Booking> equipmentList = bookingService.findAll();
-        modelAndView.addObject("equipmentList", equipmentList);
+        Iterable<Booking> bookingList = bookingService.findAll();
+        modelAndView.addObject("bookingList", bookingList);
+//        Iterable<OtherTableData> otherTableData = otherTableService.findAll(); // Change this line as per your service method
+//        modelAndView.addObject("otherTableData", otherTableData);
         return modelAndView;
+
     }
 
-    @PostMapping("/addNewEquipment")
-    public String addNewEquipment(Booking newBooking){
+    @PostMapping("/addNewBooking")
+    public String addNewBooking(Booking newBooking){
         bookingService.save(newBooking);
-        return "redirect:/equipment/findAll";
+        return "redirect:/booking/findAll";
     }
 
     @GetMapping("/editEquipment")
