@@ -21,6 +21,7 @@
     <tr>
         <th>ID</th>
         <th>name</th>
+        <th>bookingDate</th>
 
         <!-- Add more columns based on your entity fields -->
     </tr>
@@ -29,6 +30,7 @@
     <tr th:each="booking : ${bookingList}">
         <td th:text="${booking.id_booking}"></td>
         <td th:text="${booking.name}"></td>
+<!--        <td th:text="${booking.bookingDate}"></td>-->
 <!--        <td>-->
 <!--            <form th:action="@{/booking/editEquipment}" method="get">-->
 <!--                <input type="hidden" name="equipmentId" th:value="${booking.id_equipment}">-->
