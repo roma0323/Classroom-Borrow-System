@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>租借紀錄</title>
+</head>
+<body>
+
+<h2>目前被租借教室和設備</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>租借者姓名</th>
+        <th>租借ID</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 這裡需要使用Thymeleaf的樣板語言，將後端資料注入到HTML中 -->
+    <tr th:each="borrow : ${borrowList}">
+        <td th:text="${borrow.name}"></td>
+        <td th:text="${borrow.id_borrow}"></td>
+        <td>
+            <!-- 連結到顯示詳細資料的頁面 -->
+            <a th:href="@{/borrow/details/{id}(id=${borrow.id_borrow})}">詳細資料</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
