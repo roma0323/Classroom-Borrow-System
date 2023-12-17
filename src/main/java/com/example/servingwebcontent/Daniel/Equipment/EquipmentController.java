@@ -34,8 +34,35 @@ public class EquipmentController {
         // Retrieve data from MySQL and add it to the model
         Iterable<Equipment> equipmentList = equipmentService.findAll();
         modelAndView.addObject("equipmentList", equipmentList);
+        // Get distinct category
+        List<String> categories = equipmentService.findDistinctCategories();
+        modelAndView.addObject("categories", categories);
         return modelAndView;
     }
+    @GetMapping("searchByCategory")
+    public ModelAndView searchByCategory(@RequestParam String category) {
+        ModelAndView modelAndView = new ModelAndView("Daniel/findAllEquipment");
+        if (category.equals("")){
+            // Retrieve data from MySQL and add it to the model
+            Iterable<Equipment> equipmentList = equipmentService.findAll();
+            modelAndView.addObject("equipmentList", equipmentList);
+            // Get distinct category
+            List<String> categories = equipmentService.findDistinctCategories();
+            modelAndView.addObject("categories", categories);
+            return modelAndView;
+        }
+//        System.out.println(category);
+
+
+        Iterable<Equipment> equipmentList = equipmentService.findByCategory(category);
+        modelAndView.addObject("equipmentList", equipmentList);
+
+        // Get distinct category
+        List<String> categories = equipmentService.findDistinctCategories();
+        modelAndView.addObject("categories", categories);
+        return modelAndView;
+    }
+
 
     @PostMapping("/addNewEquipment")
     public String addNewEquipment(Equipment newEquipment){
@@ -63,5 +90,7 @@ public class EquipmentController {
         equipmentService.deleteById(equipmentId);
         return "redirect:/equipment/findAll";
     }
+
+
 
 }
