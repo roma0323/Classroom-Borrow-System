@@ -22,6 +22,27 @@ public class EquipmentController {
         this.equipmentService = equipmentService;
     }
 
+    @GetMapping("/list")
+    public ModelAndView list() {
+        ModelAndView modelAndView = new ModelAndView("Daniel/equipment/equipmentlist");
+        // Retrieve data from MySQL and add it to the model
+        Iterable<Equipment> equipmentList = equipmentService.findAll();
+        modelAndView.addObject("equipmentList", equipmentList);
+        // Get distinct category
+        List<String> categories = equipmentService.findDistinctCategories();
+        modelAndView.addObject("categories", categories);
+        return modelAndView;
+    }
+
+    @GetMapping("/addNewEquipment")
+    public ModelAndView addNewEquipment(){
+        ModelAndView modelAndView = new ModelAndView("Daniel/equipment/addEquipment");
+        // Get distinct category
+        List<String> categories = equipmentService.findDistinctCategories();
+        modelAndView.addObject("categories", categories);
+        return modelAndView;
+    }
+
     @GetMapping
     public List<Equipment> getEquipment(){
         return equipmentService.findAll();
@@ -63,16 +84,15 @@ public class EquipmentController {
         return modelAndView;
     }
 
-
     @PostMapping("/addNewEquipment")
     public String addNewEquipment(Equipment newEquipment){
         equipmentService.save(newEquipment);
-        return "redirect:/equipment/findAll";
+        return "redirect:/equipment/list";
     }
 
     @GetMapping("/editEquipment")
     public ModelAndView editEquipmentForm(@RequestParam Long equipmentId) {
-        ModelAndView modelAndView = new ModelAndView("Daniel/editEquipment");
+        ModelAndView modelAndView = new ModelAndView("Daniel/equipment/editEquipment");
         Optional<Equipment> optionalEquipment = equipmentService.findById(equipmentId);
         Equipment equipment = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
         modelAndView.addObject("equipment", equipment);
@@ -81,16 +101,16 @@ public class EquipmentController {
 
     @PostMapping("/editEquipment")
     public String editEquipment(@ModelAttribute Equipment updatedEquipment) {
-        equipmentService.save(updatedEquipment);
-        return "redirect:/equipment/findAll";
+        equipmentService.updateEquipment(updatedEquipment);
+        System.out.println("hello world");
+        return "redirect:/equipment/list";
     }
 
     @PostMapping("/deleteEquipment")
     public String deleteEquipment(@RequestParam Long equipmentId) {
         equipmentService.deleteById(equipmentId);
-        return "redirect:/equipment/findAll";
+        return "redirect:/equipment/list";
     }
-
 
 
 }
