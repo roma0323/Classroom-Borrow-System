@@ -1,11 +1,13 @@
 package com.example.servingwebcontent.Daniel;
 
+import com.example.servingwebcontent.Daniel.Classroom.Classroom;
 import com.example.servingwebcontent.Ray.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class DanielGreetingController {
@@ -15,7 +17,10 @@ public class DanielGreetingController {
         model.addAttribute("name", name);
         return "Daniel/greeting";   //呼叫此html檔案 在src/main/resources/templates/Daniel/greeting.html
     }
-
+    @GetMapping("/Daniel/test")
+    public ModelAndView test(){
+        return new ModelAndView("Daniel/test");
+    }
     @GetMapping("/Daniel_greeting_add_page")
     @ResponseBody
     public Person add_page() {
