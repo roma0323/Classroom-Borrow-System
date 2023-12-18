@@ -1,4 +1,4 @@
-package com.example.servingwebcontent.Ray.Equipment;
+package com.example.servingwebcontent.Ray.Booking;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

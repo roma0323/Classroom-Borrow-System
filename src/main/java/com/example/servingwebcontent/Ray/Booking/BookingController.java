@@ -1,10 +1,15 @@
-package com.example.servingwebcontent.Ray.Equipment;
+package com.example.servingwebcontent.Ray.Booking;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +25,11 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
     @GetMapping
     public List<Booking> getEquipment(){
         return bookingService.findAll();

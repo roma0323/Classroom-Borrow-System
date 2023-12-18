@@ -1,4 +1,4 @@
-package com.example.servingwebcontent.Ray.Equipment;
+package com.example.servingwebcontent.Ray.Booking;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
