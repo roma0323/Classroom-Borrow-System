@@ -33,18 +33,17 @@
         <td th:text="${booking.name}"></td>
         <td th:text="${#dates.format(booking.bookingDate, 'yyyy-MM-dd')}"></td> <!-- Format bookingDate -->
 
-        <!--        <td th:text="${booking.bookingDate}"></td>-->
-<!--        <td>-->
-<!--            <form th:action="@{/booking/editEquipment}" method="get">-->
-<!--                <input type="hidden" name="equipmentId" th:value="${booking.id_equipment}">-->
-<!--                <button type="submit">Edit</button>-->
-<!--            </form>-->
-<!--            <form th:action="@{/booking/deleteEquipment}" method="post">-->
-<!--                <input type="hidden" name="equipmentId" th:value="${booking.id_equipment}">-->
-<!--                <button type="submit">Delete</button>-->
-<!--            </form>-->
-<!--            <br>-->
-<!--        </td>-->
+        <td>
+            <form th:action="@{/booking/editBooking}" method="get">
+                <input type="hidden" name="id_booking" th:value="${booking.id_booking}">
+                <button type="submit">Edit</button>
+            </form>
+            <form th:action="@{/booking/deleteBooking}" method="post">
+                <input type="hidden" name="id_booking" th:value="${booking.id_booking}">
+                <button type="submit">Delete</button>
+            </form>
+            <br>
+        </td>
         <!-- Add more cells based on your entity fields -->
     </tr>
     </tbody>
