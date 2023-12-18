@@ -1,10 +1,15 @@
-package com.example.servingwebcontent.Ray.Equipment;
+package com.example.servingwebcontent.Ray.Booking;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +25,11 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
     @GetMapping
     public List<Booking> getEquipment(){
         return bookingService.findAll();
@@ -44,25 +54,25 @@ public class BookingController {
         return "redirect:/booking/findAll";
     }
 
-    @GetMapping("/editEquipment")
-    public ModelAndView editEquipmentForm(@RequestParam Long equipmentId) {
-        ModelAndView modelAndView = new ModelAndView("Daniel/editEquipment");
-        Optional<Booking> optionalEquipment = bookingService.findById(equipmentId);
+    @GetMapping("/editBooking")
+    public ModelAndView editBookingForm(@RequestParam Long id_booking) {
+        ModelAndView modelAndView = new ModelAndView("Ray/editBooking");
+        Optional<Booking> optionalEquipment = bookingService.findById(id_booking);
         Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
-        modelAndView.addObject("equipment", booking);
+        modelAndView.addObject("booking", booking);
         return modelAndView;
     }
 
-    @PostMapping("/editEquipment")
-    public String editEquipment(@ModelAttribute Booking updatedBooking) {
+    @PostMapping("/editBooking")
+    public String editBooking(@ModelAttribute Booking updatedBooking) {
         bookingService.save(updatedBooking);
-        return "redirect:/equipment/findAll";
+        return "redirect:/booking/findAll";
     }
 
-    @PostMapping("/deleteEquipment")
-    public String deleteEquipment(@RequestParam Long equipmentId) {
-        bookingService.deleteById(equipmentId);
-        return "redirect:/equipment/findAll";
+    @PostMapping("/deleteBooking")
+    public String deleteBooking(@RequestParam Long id_booking) {
+        bookingService.deleteById(id_booking);
+        return "redirect:/booking/findAll";
     }
 
 }

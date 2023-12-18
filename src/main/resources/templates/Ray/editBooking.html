@@ -2,23 +2,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Edit Equipment</title>
+    <title>Edit Booking</title>
 </head>
 <body>
 
-<h2>Edit Equipment</h2>
+<h2>Edit Booking</h2>
 
-<form action="/booking/editEquipment" method="post" th:object="${booking}">
-    <input type="hidden" th:field="*{id_equipment}"/>
+<form action="/booking/editBooking" method="post" th:object="${booking}">
+    <input type="hidden" th:field="*{id_booking}"/>
 
-    <label for="category">Category:</label>
-    <input type="text" id="category" th:field="*{category}" required><br><br>
+    <label for="name">name:</label>
+    <input type="text" id="name" th:field="*{name}" required><br><br>
 
-    <label for="description">Name:</label>
-    <input type="text" id="description" th:field="*{description}" required><br><br>
-
-    <label for="label">Label:</label>
-    <input type="text" id="label" th:field="*{label}" required><br><br>
+    <label for="bookingDate">Name:</label>
+    <input type="date" id="bookingDate" th:field="*{bookingDate}" required><br><br>
 
     <input type="submit" value="Save Changes">
 </form>

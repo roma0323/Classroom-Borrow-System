@@ -1,4 +1,4 @@
-package com.example.servingwebcontent.Ray.Equipment;
+package com.example.servingwebcontent.Ray.Booking;
 
 import jakarta.persistence.*;
 import java.util.Date;
