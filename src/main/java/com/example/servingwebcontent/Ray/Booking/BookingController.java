@@ -30,10 +30,31 @@ public class BookingController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
+
+    @GetMapping("/list")
+    public ModelAndView list() {
+        ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_list");
+        // Retrieve data from MySQL and add it to the model
+        Iterable<Booking> bookingList = bookingService.findAll();
+        modelAndView.addObject("bookingList", bookingList);
+        return modelAndView;
+    }
+
+    @GetMapping("/booking_detail")
+    public ModelAndView bookingDetail(@RequestParam Long id_booking) {
+        ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_detail");
+        Optional<Booking> optionalEquipment = bookingService.findById(id_booking);
+        Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
+        modelAndView.addObject("booking", booking);
+        return modelAndView;
+    }
+
     @GetMapping
     public List<Booking> getEquipment(){
         return bookingService.findAll();
     }
+
+
 
     @GetMapping("/findAll")
     public ModelAndView findAll() {
@@ -48,20 +69,23 @@ public class BookingController {
 
     }
 
+
+
     @PostMapping("/addNewBooking")
     public String addNewBooking(Booking newBooking){
         bookingService.save(newBooking);
         return "redirect:/booking/findAll";
     }
 
-    @GetMapping("/editBooking")
-    public ModelAndView editBookingForm(@RequestParam Long id_booking) {
-        ModelAndView modelAndView = new ModelAndView("Ray/editBooking");
-        Optional<Booking> optionalEquipment = bookingService.findById(id_booking);
-        Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
-        modelAndView.addObject("booking", booking);
-        return modelAndView;
-    }
+//    @GetMapping("/editBooking")
+//    public ModelAndView editBookingForm(@RequestParam Long id_booking) {
+//        ModelAndView modelAndView = new ModelAndView("booking_detail");
+//        Optional<Booking> optionalEquipment = bookingService.findById(id_booking);
+//        Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
+//        modelAndView.addObject("booking", booking);
+//        return modelAndView;
+//    }
+
 
     @PostMapping("/editBooking")
     public String editBooking(@ModelAttribute Booking updatedBooking) {
