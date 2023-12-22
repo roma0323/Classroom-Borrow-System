@@ -1,6 +1,7 @@
 package com.example.servingwebcontent.Ray.Booking;
 
 
+import com.example.servingwebcontent.Daniel.Equipment.Equipment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -30,10 +31,25 @@ public class BookingController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
+
+    @GetMapping("/list")
+    public ModelAndView list() {
+        ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_list");
+        // Retrieve data from MySQL and add it to the model
+        Iterable<Booking> bookingList = bookingService.findAll();
+        modelAndView.addObject("bookingList", bookingList);
+        // Get distinct category
+//        List<String> categories = equipmentService.findDistinctCategories();
+//        modelAndView.addObject("categories", categories);
+        return modelAndView;
+    }
+
     @GetMapping
     public List<Booking> getEquipment(){
         return bookingService.findAll();
     }
+
+
 
     @GetMapping("/findAll")
     public ModelAndView findAll() {
@@ -47,6 +63,8 @@ public class BookingController {
         return modelAndView;
 
     }
+
+
 
     @PostMapping("/addNewBooking")
     public String addNewBooking(Booking newBooking){
