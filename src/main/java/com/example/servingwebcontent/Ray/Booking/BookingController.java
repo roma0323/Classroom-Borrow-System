@@ -1,7 +1,6 @@
 package com.example.servingwebcontent.Ray.Booking;
 
 
-import com.example.servingwebcontent.Daniel.Equipment.Equipment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +37,15 @@ public class BookingController {
         // Retrieve data from MySQL and add it to the model
         Iterable<Booking> bookingList = bookingService.findAll();
         modelAndView.addObject("bookingList", bookingList);
-        // Get distinct category
-//        List<String> categories = equipmentService.findDistinctCategories();
-//        modelAndView.addObject("categories", categories);
+        return modelAndView;
+    }
+
+    @GetMapping("/booking_detail")
+    public ModelAndView bookingDetail(@RequestParam Long id_booking) {
+        ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_detail");
+        Optional<Booking> optionalEquipment = bookingService.findById(id_booking);
+        Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
+        modelAndView.addObject("booking", booking);
         return modelAndView;
     }
 
@@ -72,14 +77,15 @@ public class BookingController {
         return "redirect:/booking/findAll";
     }
 
-    @GetMapping("/editBooking")
-    public ModelAndView editBookingForm(@RequestParam Long id_booking) {
-        ModelAndView modelAndView = new ModelAndView("Ray/editBooking");
-        Optional<Booking> optionalEquipment = bookingService.findById(id_booking);
-        Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
-        modelAndView.addObject("booking", booking);
-        return modelAndView;
-    }
+//    @GetMapping("/editBooking")
+//    public ModelAndView editBookingForm(@RequestParam Long id_booking) {
+//        ModelAndView modelAndView = new ModelAndView("booking_detail");
+//        Optional<Booking> optionalEquipment = bookingService.findById(id_booking);
+//        Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
+//        modelAndView.addObject("booking", booking);
+//        return modelAndView;
+//    }
+
 
     @PostMapping("/editBooking")
     public String editBooking(@ModelAttribute Booking updatedBooking) {
