@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>預約清單</title>
+    <th:block th:include="head/head :: headerfiles"></th:block>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header th:insert="navbar/navbar_authority :: header"> </header>
+
+<!-- ======= Main ======= -->
+<main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>預約清單</h2>
+                <ol>
+                    <li><a href="index.html">預約管理</a></li>
+                    <li>預約清單</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <!-- End Breadcrumbs Section -->
+
+    <section class="borrowListDetail text-center">
+        <div class="container" style="width: 50%;">
+            <!-- <div class="container" style="border: 5px solid #0f3249; border-radius: 10px; padding: 15px;"> -->
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">姓名</div>
+                <div th:text="${booking.name}" class="col-8" style="text-align:left;"></div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">學號</div>
+                <div class="col-8" style="text-align:left;">參數</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">信箱</div>
+                <div class="col-8" style="text-align:left;">參數</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">手機</div>
+                <div class="col-8" style="text-align:left;">參數</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">借用原因</div>
+                <div class="col-8" style="text-align:left;">參數</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">借用教室</div>
+                <div class="col-8" style="text-align:left;">參數</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">借用日期</div>
+                <div class="col-8" style="text-align:left;">參數</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">借用時間</div>
+                <div class="col-8" style="text-align:left;">參數</div>
+            </div>
+            &nbsp;
+            <div class="d-flex justify-content-center">
+                <button type="add" class="btn btn-primary btn-sm custom-button">拒絕</button>
+                &nbsp;
+                <button type="add" class="btn btn-primary btn-sm custom-button">編輯</button>
+                &nbsp;
+                <button type="add" class="btn btn-primary btn-sm custom-button">通過</button>
+            </div>
+        </div>
+    </section>
+
+
+
+</main>
+
+<!-- Vendor JS Files -->
+<script type="text/javascript" th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/aos/aos.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+
+</body>
+
+</html>
