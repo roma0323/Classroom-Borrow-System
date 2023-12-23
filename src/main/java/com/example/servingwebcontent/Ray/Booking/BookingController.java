@@ -49,6 +49,20 @@ public class BookingController {
         return modelAndView;
     }
 
+    @GetMapping("/add")
+    public ModelAndView add() {
+        ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_add");
+        Iterable<Booking> bookingList = bookingService.findAll();
+        modelAndView.addObject("bookingList", bookingList);
+        return modelAndView;
+    }
+
+    @PostMapping("/add")
+    public String add(Booking newBooking){
+        bookingService.save(newBooking);
+        return "redirect:/booking/list";
+    }
+
     @GetMapping
     public List<Booking> getEquipment(){
         return bookingService.findAll();
