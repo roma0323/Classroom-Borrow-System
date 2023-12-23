@@ -24,6 +24,7 @@ USE `Classroon_Equipment_Booking_System` ;
 DROP TABLE IF EXISTS `Classroon_Equipment_Booking_System`.`Member` ;
 
 CREATE TABLE IF NOT EXISTS `Classroon_Equipment_Booking_System`.`Member` (
+
   `id_member` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `email` VARCHAR(45) NOT NULL,
@@ -40,16 +41,16 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Classroon_Equipment_Booking_System`.`Borrow` ;
 
 CREATE TABLE IF NOT EXISTS `Classroon_Equipment_Booking_System`.`Borrow` (
-  `id_borrow` INT NOT NULL,
-  `timestamp` TIMESTAMP(6) NULL,
-  `name` VARCHAR(45) NULL,
-  `identity` VARCHAR(45) NULL,
-  `departmentGrade` VARCHAR(45) NULL,
-  `phone` VARCHAR(45) NULL,
-  `identitycard` VARCHAR(45) NULL,
-  `status` VARCHAR(45) NULL,
-  PRIMARY KEY (`id_borrow`))
-ENGINE = InnoDB;
+                                                                             `id_borrow` INT NOT NULL,
+                                                                             `timestamp` TIMESTAMP(6) NULL,
+    `name` VARCHAR(45) NULL,
+    `identity` VARCHAR(45) NULL,
+    `department_grade` VARCHAR(45) NULL,
+    `phone` VARCHAR(45) NULL,
+    `identitycard` VARCHAR(45) NULL,
+    `status` VARCHAR(45) NULL,
+    PRIMARY KEY (`id_borrow`))
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -58,12 +59,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Classroon_Equipment_Booking_System`.`Classroom` ;
 
 CREATE TABLE IF NOT EXISTS `Classroon_Equipment_Booking_System`.`Classroom` (
-  `id_classroom` INT NOT NULL,
-  `name` VARCHAR(45) NULL,
-  `description` VARCHAR(45) NULL,
-  `image` BLOB NULL,
-  PRIMARY KEY (`id_classroom`))
-ENGINE = InnoDB;
+                                                                                `id_classroom` INT NOT NULL,
+                                                                                `name` VARCHAR(45) NULL,
+    `description` VARCHAR(45) NULL,
+    `image` BLOB NULL,
+    PRIMARY KEY (`id_classroom`))
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -72,6 +73,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Classroon_Equipment_Booking_System`.`Booking` ;
 
 CREATE TABLE IF NOT EXISTS `Classroon_Equipment_Booking_System`.`Booking` (
+
   `id_booking` INT NOT NULL,
   `id_borrow` INT NULL,
   `id_classroom` INT NULL,
@@ -93,12 +95,12 @@ CREATE TABLE IF NOT EXISTS `Classroon_Equipment_Booking_System`.`Booking` (
     REFERENCES `Classroon_Equipment_Booking_System`.`Borrow` (`id_borrow`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `id_booking_classroom`
+    CONSTRAINT `id_booking_classroom`
     FOREIGN KEY (`id_classroom`)
     REFERENCES `Classroon_Equipment_Booking_System`.`Classroom` (`id_classroom`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -122,12 +124,12 @@ CREATE TABLE IF NOT EXISTS `Classroon_Equipment_Booking_System`.`Borrow_Classroo
     REFERENCES `Classroon_Equipment_Booking_System`.`Borrow` (`id_borrow`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `id_Classroom`
+    CONSTRAINT `id_Classroom`
     FOREIGN KEY (`id_classroom`)
     REFERENCES `Classroon_Equipment_Booking_System`.`Classroom` (`id_classroom`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -136,12 +138,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Classroon_Equipment_Booking_System`.`Equipment` ;
 
 CREATE TABLE IF NOT EXISTS `Classroon_Equipment_Booking_System`.`Equipment` (
-  `id_equipment` INT NOT NULL,
-  `category` VARCHAR(45) NULL,
-  `description` VARCHAR(45) NULL,
-  `label` VARCHAR(45) NULL,
-  PRIMARY KEY (`id_equipment`))
-ENGINE = InnoDB;
+                                                                                `id_equipment` INT NOT NULL,
+                                                                                `category` VARCHAR(45) NULL,
+    `description` VARCHAR(45) NULL,
+    `label` VARCHAR(45) NULL,
+    PRIMARY KEY (`id_equipment`))
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -150,6 +152,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Classroon_Equipment_Booking_System`.`Borrow_Equipment` ;
 
 CREATE TABLE IF NOT EXISTS `Classroon_Equipment_Booking_System`.`Borrow_Equipment` (
+
   `id_borrow_equipment` INT NOT NULL,
   `id_borrow` INT NULL,
   `id_equipment` INT NULL,
@@ -167,26 +170,27 @@ CREATE TABLE IF NOT EXISTS `Classroon_Equipment_Booking_System`.`Borrow_Equipmen
   INDEX `idLendBy_idx` (`id_lendby` ASC) VISIBLE,
   INDEX `idReturnBy_idx` (`id_returnby` ASC) VISIBLE,
   CONSTRAINT `idBorrow`
+
     FOREIGN KEY (`id_borrow`)
     REFERENCES `Classroon_Equipment_Booking_System`.`Borrow` (`id_borrow`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `idEquipment`
+    CONSTRAINT `idEquipment`
     FOREIGN KEY (`id_equipment`)
     REFERENCES `Classroon_Equipment_Booking_System`.`Equipment` (`id_equipment`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `idLendBy`
+    CONSTRAINT `idLendBy`
     FOREIGN KEY (`id_lendby`)
     REFERENCES `Classroon_Equipment_Booking_System`.`Member` (`id_member`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `idReturnBy`
+    CONSTRAINT `idReturnBy`
     FOREIGN KEY (`id_returnby`)
     REFERENCES `Classroon_Equipment_Booking_System`.`Member` (`id_member`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
