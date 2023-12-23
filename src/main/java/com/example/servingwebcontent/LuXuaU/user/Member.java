@@ -1,6 +1,8 @@
 package com.example.servingwebcontent.LuXuaU.user;
 
 import jakarta.persistence.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
 @Table(name = "Member")
 public class Member {
@@ -22,15 +24,19 @@ public class Member {
     private String email;
     private String identity;
     private String password;
-    private String salt;
 
-    public Member(long id_member, String name, String email, String identity, String password, String salt){
+    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @PrePersist
+    public void prePersist() {
+        this.password = passwordEncoder.encode(this.password);
+    }
+
+    public Member(long id_member, String name, String email, String identity, String password) {
         this.id_member = id_member;
         this.name = name;
         this.email = email;
         this.identity = identity;
         this.password = password;
-        this.salt = salt;
     }
 
     public Member(){
@@ -51,10 +57,6 @@ public class Member {
 
     public String getPassword() {
         return password;
-    }
-
-    public String getSalt() {
-        return salt;
     }
 
     public long getId_member() {
@@ -81,10 +83,6 @@ public class Member {
         this.password = password;
     }
 
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
     @Override
     public String toString() {
         return "Member{" +
@@ -93,7 +91,6 @@ public class Member {
                 ", email='" + email + '\'' +
                 ", identity='" + identity + '\'' +
                 ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
                 '}';
     }
 }
