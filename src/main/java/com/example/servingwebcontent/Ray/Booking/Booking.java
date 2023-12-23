@@ -44,6 +44,10 @@ public class Booking {
 
     @Column(name = "status")
     private String status;
+    @PrePersist
+    protected void onCreate() {
+        this.status = "未通過"; // Set the default status before persisting
+    }
 
     @Column(name = "id_borrow")
     private Integer idBorrow;
