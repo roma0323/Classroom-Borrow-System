@@ -13,14 +13,12 @@
         <label for="email">email:</label>
         <input type="text" id="email" name="email"  required><br><br>
 
-        <label for="identity">email:</label>
+        <label for="identity">identity:</label>
         <input type="text" id="identity" name="identity"  required><br><br>
 
         <label for="password">password:</label>
         <input type="text" id="password" name="password" required><br><br>
 
-        <label for="salt">salt:</label>
-        <input type="text" id="salt" name="salt" required><br><br>
 
         <input type="submit" value="Submit">
     </form>
@@ -34,7 +32,6 @@
             <th>email</th>
             <th>identity</th>
             <th>password</th>
-            <th>salt</th>
             <!-- Add more columns based on your entity fields -->
         </tr>
         </thead>
@@ -45,7 +42,6 @@
             <td th:text="${member.email}"></td>
             <td th:text="${member.identity}"></td>
             <td th:text="${member.password}"></td>
-            <td th:text="${member.salt}"></td>
 
             <td>
                 <form th:action="@{/member/editMember}" method="get">
