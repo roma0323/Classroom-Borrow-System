@@ -1,6 +1,8 @@
 package com.example.servingwebcontent.Ray.Booking;
 
 
+import com.example.servingwebcontent.Daniel.Classroom.Classroom;
+import com.example.servingwebcontent.Daniel.Classroom.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class BookingController {
 
     private final BookingService bookingService;
+    private ClassroomService classroomService;
 
     @Autowired
     public BookingController(BookingService bookingService) {
@@ -35,8 +38,11 @@ public class BookingController {
     public ModelAndView list() {
         ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_list");
         // Retrieve data from MySQL and add it to the model
+
         Iterable<Booking> bookingList = bookingService.findAll();
+//        Classroom classroom = classroomService.findById();
         modelAndView.addObject("bookingList", bookingList);
+//        modelAndView.addObject("classroom", classroom);
         return modelAndView;
     }
 
@@ -46,7 +52,34 @@ public class BookingController {
         Optional<Booking> optionalEquipment = bookingService.findById(id_booking);
         Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
         modelAndView.addObject("booking", booking);
+        modelAndView.addObject("pass", "通過");
         return modelAndView;
+    }
+
+    @GetMapping("/add")
+    public ModelAndView add() {
+        ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_add");
+        Iterable<Booking> bookingList = bookingService.findAll();
+        modelAndView.addObject("bookingList", bookingList);
+        return modelAndView;
+    }
+
+    @PostMapping("/add")
+    public String add(Booking newBooking){
+        bookingService.save(newBooking);
+        return "redirect:/booking/list";
+    }
+
+    @PostMapping("/consent_apply")
+    public String consent_apply(@RequestParam Long id_booking){
+        bookingService.consent_apply(id_booking);
+        return "redirect:/booking/list";
+    }
+
+    @PostMapping("/deleteBooking")
+    public String deleteBooking(@RequestParam Long id_booking) {
+        bookingService.deleteById(id_booking);
+        return "redirect:/booking/list";
     }
 
     @GetMapping
@@ -93,10 +126,6 @@ public class BookingController {
         return "redirect:/booking/findAll";
     }
 
-    @PostMapping("/deleteBooking")
-    public String deleteBooking(@RequestParam Long id_booking) {
-        bookingService.deleteById(id_booking);
-        return "redirect:/booking/findAll";
-    }
+
 
 }

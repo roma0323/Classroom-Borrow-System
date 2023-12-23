@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>預約清單</title>
+    <th:block th:include="head/head :: headerfiles"></th:block>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header th:insert="navbar/navbar_authority :: header"> </header>
+
+<!-- ======= Main ======= -->
+<main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>預約申請資訊</h2>
+            </div>
+        </div>
+    </section>
+    <!-- End Breadcrumbs Section -->
+
+    <section class="borrowListDetail text-center">
+        <div class="container" style="width: 50%;">
+            <!-- <div class="container" style="border: 5px solid #0f3249; border-radius: 10px; padding: 15px;"> -->
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">姓名</div>
+                <div th:text="${booking.name}" class="col-8" style="text-align:left;"></div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">學號</div>
+                <div th:text="${booking.idStudent}" class="col-8" style="text-align:left;"></div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">信箱</div>
+                <div th:text="${booking.email}" class="col-8" style="text-align:left;"></div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">手機</div>
+                <div th:text="${booking.phone}" class="col-8" style="text-align:left;"></div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">借用原因</div>
+                <div th:text="${booking.bookingReason}" class="col-8" style="text-align:left;"></div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">借用教室</div>
+                <div th:text="${booking.idClassroom}" class="col-8" style="text-align:left;"></div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">借用開始時間</div>
+                <div  th:text="${booking.startTime}" class="col-8" style="text-align:left;"></div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">借用結束時間</div>
+                <div th:text="${booking.endTime}" class="col-8" style="text-align:left;"></div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" style="font-weight:bold; text-align:left;">申請狀態</div>
+                <div th:text="${booking.status}" class="col-8" style="text-align:left;"></div>
+            </div>
+            &nbsp;
+
+            <div class="d-flex justify-content-center">
+                <form action="/booking/consent_apply" method="post" th:object="${booking}">
+                    <input type="hidden" name="id_booking" th:value="${booking.id_booking}"/>
+                    <button type="submit" class="btn btn-primary btn-sm custom-button">同意</button>
+                </form>
+                <form th:action="@{/booking/deleteBooking}" method="post">
+                    <input type="hidden" name="id_booking" th:value="${booking.id_booking}">
+                    <button type="submit" class="btn btn-primary btn-sm custom-button" >刪除</button>
+                </form>
+            </div>
+
+
+
+
+
+
+
+        </div>
+    </section>
+
+
+
+</main>
+
+<!-- Vendor JS Files -->
+<script type="text/javascript" th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/aos/aos.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+
+</body>
+
+</html>

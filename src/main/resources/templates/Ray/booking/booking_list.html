@@ -20,10 +20,6 @@
 
       <div class="d-flex justify-content-between align-items-center">
         <h2>預約清單</h2>
-        <ol>
-          <li><a href="index.html">預約管理</a></li>
-          <li>預約清單</li>
-        </ol>
       </div>
     </div>
   </section>
@@ -36,9 +32,9 @@
         <th scope="col">預約編號</th>
         <th scope="col">申請人</th>
         <th scope="col">教室</th>
-        <th scope="col">日期</th>
         <th scope="col">開始時間</th>
         <th scope="col">結束時間</th>
+        <th scope="col">申請狀態</th>
       </tr>
       </thead>
       <!--這邊應該要丟參數吧？-->
@@ -46,10 +42,12 @@
       <tr th:each="booking : ${bookingList}">
         <th th:text="${booking.id_booking}" scope="row" class="align-middle"></th>
         <td th:text="${booking.name}" class="align-middle"></td>
-        <td th:text="${booking.id_booking}" class="align-middle"></td>
-        <td th:text="${#dates.format(booking.bookingDate, 'yyyy-MM-dd')}" class="align-middle"></td>
-        <td class="align-middle">10:00</td>
-        <td class="align-middle">12:00</td>
+        <td th:text="${booking.idClassroom}" class="align-middle"></td>
+<!--        <td th:if="${#dates.isValid(booking.startTime, 'yyyy-MM-dd')}" th:text="${#dates.format(booking.startTime, 'MM-yyyy')}" class="align-middle"></td>-->
+<!--        <td th:text="${#dates.format(T(java.text.SimpleDateFormat).newSimpleDateFormat('yyyy-MM-dd HH:mm:ss').parse(booking.startTime), 'MM-yyyy')}" class="align-middle"></td>-->
+        <td th:text="${booking.startTime}" class="align-middle"></td>
+        <td th:text="${booking.endTime}" class="align-middle"></td>
+        <td th:text="${booking.status}" class="align-middle"></td>
         <td>
 
 
