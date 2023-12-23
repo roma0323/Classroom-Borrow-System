@@ -10,7 +10,8 @@ public class Member {
     @SequenceGenerator(
             name = "user_sequence",
             sequenceName = "user_sequence",
-            allocationSize = 1
+            allocationSize = 1,
+            initialValue = 3
     )
 
     @GeneratedValue(
