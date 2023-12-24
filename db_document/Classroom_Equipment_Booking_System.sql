@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `Classroon_Equipment_Booking_System`.`Borrow` (
   `timestamp` TIMESTAMP(6) NULL,
   `name` VARCHAR(45) NULL,
   `identity` VARCHAR(45) NULL,
-  `departmentGrade` VARCHAR(45) NULL,
+  `department_grade` VARCHAR(45) NULL,
   `phone` VARCHAR(45) NULL,
   `identitycard` VARCHAR(45) NULL,
   `status` VARCHAR(45) NULL,
@@ -107,14 +107,14 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Classroon_Equipment_Booking_System`.`Borrow_Classroom` ;
 
 CREATE TABLE IF NOT EXISTS `Classroon_Equipment_Booking_System`.`Borrow_Classroom` (
-  `id_borrow_classroom` INT NOT NULL,
+  `id_borrowclassroom` INT NOT NULL,
   `id_borrow` INT NULL,
   `id_classroom` INT NULL,
   `timestamp` TIMESTAMP(6) NULL,
   `teacher` VARCHAR(45) NULL,
   `purpose` VARCHAR(45) NULL,
   `note` VARCHAR(45) NULL,
-  PRIMARY KEY (`id_borrow_classroom`),
+  PRIMARY KEY (`id_borrowclassroom`),
   INDEX `idBorrow_idx` (`id_borrow` ASC) VISIBLE,
   INDEX `idClassroom_idx` (`id_classroom` ASC) VISIBLE,
   CONSTRAINT `id_Borrow`

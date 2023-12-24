@@ -75,4 +75,13 @@ public class BorrowController {
 
         return modelAndView;
     }
+
+    @GetMapping("/review")
+    public ModelAndView reviewBorrow(){
+        ModelAndView modelAndView = new ModelAndView("WayLun/BorrowReview");
+        Iterable<Borrow> borrowList = borrowService.getReviewBorrow();
+        modelAndView.addObject("borrowList", borrowList);
+
+        return modelAndView;
+    }
 }
