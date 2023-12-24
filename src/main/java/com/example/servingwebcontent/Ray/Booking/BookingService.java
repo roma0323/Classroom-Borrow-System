@@ -11,12 +11,10 @@ import java.util.Optional;
 public class BookingService {
 
     private final BookingRepository bookingRepository;
-    private final ClassroomRepository classroomRepository;
 
     @Autowired
     public BookingService(BookingRepository bookingRepository, ClassroomRepository classroomRepository){
         this.bookingRepository = bookingRepository;
-        this.classroomRepository = classroomRepository;
     }
 
 

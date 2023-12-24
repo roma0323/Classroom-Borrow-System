@@ -12,7 +12,6 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_sequence")
     @SequenceGenerator(name = "booking_sequence", sequenceName = "booking_sequence",            allocationSize = 1
     )
-    @Column(name = "id_Booking")
     private long id_booking;
 
     private String name;
@@ -21,7 +20,6 @@ public class Booking {
 
     private String id_student;
 
-    @Column(name = "email")
     private String email;
 
     @Column(name = "phone")
