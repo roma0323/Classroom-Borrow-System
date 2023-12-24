@@ -1,4 +1,4 @@
-package com.example.servingwebcontent.LuXuaU.config;
+package com.example.servingwebcontent.LuXuaU.security;
 
 
 import com.example.servingwebcontent.LuXuaU.user.MemberService;
@@ -40,12 +40,14 @@ public class SecurityConfig {
 
         return authProvider;
     }
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/css/**", "/", "/login").permitAll()
+                        .requestMatchers("/css/**", "/", "/login", "/member/resetPassword").permitAll()
 //                        .anyRequest().authenticated()
                                 .anyRequest().hasAnyRole("ADMIN")
                 )
@@ -53,7 +55,6 @@ public class SecurityConfig {
                     .loginPage("/login").permitAll()
 //                        .usernameParameter("email")
 //                        .passwordParameter("pass")
-                    .failureUrl("/login-error")
                 );
 
         return http.build();
