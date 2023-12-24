@@ -1,18 +1,12 @@
-package com.example.servingwebcontent.LuXuaU.config;
+package com.example.servingwebcontent.LuXuaU.security;
 
 import com.example.servingwebcontent.LuXuaU.user.Member;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 public class MyUserDetails implements UserDetails {
     private Member member;

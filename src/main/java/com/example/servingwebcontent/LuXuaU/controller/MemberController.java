@@ -3,6 +3,9 @@ package com.example.servingwebcontent.LuXuaU.controller;
 import com.example.servingwebcontent.LuXuaU.user.Member;
 import com.example.servingwebcontent.LuXuaU.user.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,19 +44,46 @@ public class MemberController {
         return "redirect:/member/findAll";
     }
 
-    @GetMapping("/editMember")
-    public ModelAndView editMemberForm(@RequestParam Long id_member) {
-        ModelAndView modelAndView = new ModelAndView("LuXuaU/member/editMember");
-        Optional<Member> optionalMember = memberService.findById(id_member);
-        Member member = optionalMember.orElse(null); // or handle it in a way that suits your logic
+    @GetMapping("/resetPassword")
+    public String resetPassword() {
+        return "LuXuaU/member/resetPassword";
+    }
+
+    @PostMapping("/resetPassword")
+    public String resetPassword(@RequestParam String email) {
+        memberService.resetPassword(email);
+        return "redirect:/login";
+    }
+
+    @GetMapping("/findMember")
+    public String findMember() {
+        return "LuXuaU/member/findMember";
+    }
+
+    @PostMapping("/findMember")
+    public ModelAndView findMember(@RequestParam String email) {
+        ModelAndView modelAndView = new ModelAndView("LuXuaU/member/findMember");
+
+        Member member = memberService.findByEmail(email);
+        System.out.println(member);
         modelAndView.addObject("member", member);
         return modelAndView;
     }
 
+    @GetMapping("/editMember")
+    public String editMemberForm() {
+        return "LuXuaU/member/editMember";
+    }
+
     @PostMapping("/editMember")
-    public String editMemberForm(@ModelAttribute Member updatedMember) {
-        memberService.save(updatedMember);
-        return "redirect:/member/findAll";
+    public String editMemberForm(@RequestParam String name, String identity, String password) {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String memberEmail = authentication.getName();
+        Member member = memberService.findByEmail(memberEmail);
+        Member updateMember = new Member(member.getId_member(), name, memberEmail, identity, password);
+        memberService.save(updateMember);
+        return "redirect:/";
     }
 
     @PostMapping("/deleteMember")
