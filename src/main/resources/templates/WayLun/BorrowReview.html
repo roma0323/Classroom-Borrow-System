@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>審核租借清單</title>
+</head>
+<body>
+
+<h2>待審核中的租借</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>身份證號碼</th>
+        <th>部門/年級</th>
+        <th>教師</th>
+        <th>用途</th>
+        <th>備註</th>
+        <th>教室</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="borrow : ${borrowList}">
+        <td th:text="${borrow.name}"></td>
+        <td th:text="${borrow.identity}"></td>
+        <td th:text="${borrow.departmentGrade}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

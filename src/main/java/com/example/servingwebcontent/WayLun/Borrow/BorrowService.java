@@ -31,4 +31,8 @@ public class BorrowService {
     public Optional<Borrow> findById(Long borrowId){
         return borrowRepository.findById(borrowId);
     }
+
+    public List<Borrow> getReviewBorrow(){
+        return borrowRepository.findByStatus("審核中");
+    }
 }

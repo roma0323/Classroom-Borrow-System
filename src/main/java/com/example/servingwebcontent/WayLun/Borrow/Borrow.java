@@ -1,5 +1,6 @@
 package com.example.servingwebcontent.WayLun.Borrow;
 
+import com.example.servingwebcontent.WayLun.BorrowClassroom.BorrowClassroom;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -29,10 +30,11 @@ public class Borrow {
     private String identitycard;
 
     private String status;
-
     // Constructors
     public Borrow() {
         // Default constructor
+        this.timestamp = new Date();
+        this.status = "審核中";
     }
 
     public Borrow(long id_borrow, Date timestamp, String name, String identity, String departmentGrade,
