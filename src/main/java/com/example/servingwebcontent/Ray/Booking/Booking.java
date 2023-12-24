@@ -19,7 +19,7 @@ public class Booking {
 
     private String identity;
 
-    private String idStudent;
+    private String id_student;
 
     @Column(name = "email")
     private String email;
@@ -27,20 +27,20 @@ public class Booking {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "bookingReason")
-    private String bookingReason;
+    @Column(name = "booking_reason")
+    private String booking_reason;
 
-    @Column(name = "idClassroom")
-    private Integer idClassroom;
+    @Column(name = "id_classroom")
+    private Integer id_classroom;
 
-    @Column(name = "bookingDate")
-    private Date bookingDate;
+    @Column(name = "booking_date")
+    private Date booking_date;
 
-    @Column(name = "startTime")
-    private String startTime;
+    @Column(name = "start_time")
+    private String start_time;
 
-    @Column(name = "endTime")
-    private String endTime;
+    @Column(name = "end_time")
+    private String end_time;
 
     @Column(name = "status")
     private String status;
@@ -50,29 +50,29 @@ public class Booking {
     }
 
     @Column(name = "id_borrow")
-    private Integer idBorrow;
+    private Integer id_borrow;
 
     // Constructors
     public Booking() {
         // Default constructor
     }
 
-    public Booking(long id_booking, String name, String identity, String idStudent, String email,
-                   String phone, String bookingReason, Integer idClassroom, Date bookingDate,
-                   String startTime, String endTime, String status, Integer idBorrow) {
+    public Booking(long id_booking, String name, String identity, String id_student, String email,
+                   String phone, String booking_reason, Integer id_classroom, Date booking_date,
+                   String start_time, String end_time, String status, Integer id_borrow) {
         this.id_booking = id_booking;
         this.name = name;
         this.identity = identity;
-        this.idStudent = idStudent;
+        this.id_student = id_student;
         this.email = email;
         this.phone = phone;
-        this.bookingReason = bookingReason;
-        this.idClassroom = idClassroom;
-        this.bookingDate = bookingDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.booking_reason = booking_reason;
+        this.id_classroom = id_classroom;
+        this.booking_date = booking_date;
+        this.start_time = start_time;
+        this.end_time = end_time;
         this.status = status;
-        this.idBorrow = idBorrow;
+        this.id_borrow = id_borrow;
     }
 
     // Getters and Setters
@@ -101,12 +101,12 @@ public class Booking {
         this.identity = identity;
     }
 
-    public String getIdStudent() {
-        return idStudent;
+    public String getId_student() {
+        return id_student;
     }
 
-    public void setIdStudent(String idStudent) {
-        this.idStudent = idStudent;
+    public void setId_student(String id_student) {
+        this.id_student = id_student;
     }
 
     public String getEmail() {
@@ -125,44 +125,44 @@ public class Booking {
         this.phone = phone;
     }
 
-    public String getBookingReason() {
-        return bookingReason;
+    public String getBooking_reason() {
+        return booking_reason;
     }
 
-    public void setBookingReason(String bookingReason) {
-        this.bookingReason = bookingReason;
+    public void setBooking_reason(String booking_reason) {
+        this.booking_reason = booking_reason;
     }
 
-    public Integer getIdClassroom() {
-        return idClassroom;
+    public Integer getId_classroom() {
+        return id_classroom;
     }
 
-    public void setIdClassroom(Integer idClassroom) {
-        this.idClassroom = idClassroom;
+    public void setId_classroom(Integer id_classroom) {
+        this.id_classroom = id_classroom;
     }
 
-    public Date getBookingDate() {
-        return bookingDate;
+    public Date getBooking_date() {
+        return booking_date;
     }
 
-    public void setBookingDate(Date bookingDate) {
-        this.bookingDate = bookingDate;
+    public void setBooking_date(Date booking_date) {
+        this.booking_date = booking_date;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getStart_time() {
+        return start_time;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public String getEnd_time() {
+        return end_time;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setEnd_time(String end_time) {
+        this.end_time = end_time;
     }
 
     public String getStatus() {
@@ -173,12 +173,12 @@ public class Booking {
         this.status = status;
     }
 
-    public Integer getIdBorrow() {
-        return idBorrow;
+    public Integer getId_borrow() {
+        return id_borrow;
     }
 
-    public void setIdBorrow(Integer idBorrow) {
-        this.idBorrow = idBorrow;
+    public void setId_borrow(Integer id_borrow) {
+        this.id_borrow = id_borrow;
     }
 
 // toString() method remains unchanged
@@ -190,16 +190,16 @@ public class Booking {
                 "id_booking=" + id_booking +
                 ", name='" + name + '\'' +
                 ", identity='" + identity + '\'' +
-                ", idStudent='" + idStudent + '\'' +
+                ", id_student='" + id_student + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", bookingReason='" + bookingReason + '\'' +
-                ", idClassroom=" + idClassroom +
-                ", bookingDate=" + bookingDate +
-                ", startTime='" + startTime + '\'' +
-                ", endTime='" + endTime + '\'' +
+                ", booking_reason='" + booking_reason + '\'' +
+                ", id_classroom=" + id_classroom +
+                ", booking_date=" + booking_date +
+                ", start_time='" + start_time + '\'' +
+                ", end_time='" + end_time + '\'' +
                 ", status='" + status + '\'' +
-                ", idBorrow=" + idBorrow +
+                ", id_borrow=" + id_borrow +
                 '}';
     }
 }

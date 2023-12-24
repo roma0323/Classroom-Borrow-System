@@ -32,13 +32,13 @@
     </thead>
     <tbody>
     <tr th:each="classroom : ${classroomList}">
-        <td th:text="${classroom.idClassroom}"></td>
+        <td th:text="${classroom.id_classroom}"></td>
         <td th:text="${classroom.name}"></td>
         <td th:text="${classroom.description}"></td>
 
         <td>
             <form th:action="@{/classroom/delete}" method="post">
-                <input type="hidden" name="classroomId" th:value="${classroom.idClassroom}">
+                <input type="hidden" name="classroomId" th:value="${classroom.id_classroom}">
                 <button type="submit">Delete</button>
             </form>
             <br>

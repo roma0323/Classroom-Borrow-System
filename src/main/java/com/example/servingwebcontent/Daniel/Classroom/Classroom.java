@@ -15,8 +15,8 @@ public class Classroom {
             strategy = GenerationType.SEQUENCE,
             generator = "classroom_sequence"
     )
-    @Column(name = "idClassroom")
-    private long idClassroom;
+    @Column(name = "id_classroom")
+    private long id_classroom;
     private String name;
     private String description;
     @Lob
@@ -25,19 +25,19 @@ public class Classroom {
     public Classroom() {
     }
 
-    public Classroom(long idClassroom, String name, String description, byte[] image) {
-        this.idClassroom = idClassroom;
+    public Classroom(long id_classroom, String name, String description, byte[] image) {
+        this.id_classroom = id_classroom;
         this.name = name;
         this.description = description;
         this.image = image;
     }
 
-    public long getIdClassroom() {
-        return idClassroom;
+    public long getId_classroom() {
+        return id_classroom;
     }
 
-    public void setIdClassroom(long idClassroom) {
-        this.idClassroom = idClassroom;
+    public void setId_classroom(long id_classroom) {
+        this.id_classroom = id_classroom;
     }
 
     public String getName() {

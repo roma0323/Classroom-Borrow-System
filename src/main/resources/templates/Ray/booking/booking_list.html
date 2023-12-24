@@ -42,11 +42,11 @@
       <tr th:each="booking : ${bookingList}">
         <th th:text="${booking.id_booking}" scope="row" class="align-middle"></th>
         <td th:text="${booking.name}" class="align-middle"></td>
-        <td th:text="${booking.idClassroom}" class="align-middle"></td>
-<!--        <td th:if="${#dates.isValid(booking.startTime, 'yyyy-MM-dd')}" th:text="${#dates.format(booking.startTime, 'MM-yyyy')}" class="align-middle"></td>-->
-<!--        <td th:text="${#dates.format(T(java.text.SimpleDateFormat).newSimpleDateFormat('yyyy-MM-dd HH:mm:ss').parse(booking.startTime), 'MM-yyyy')}" class="align-middle"></td>-->
-        <td th:text="${booking.startTime}" class="align-middle"></td>
-        <td th:text="${booking.endTime}" class="align-middle"></td>
+        <td th:text="${booking.id_classroom}" class="align-middle"></td>
+<!--        <td th:if="${#dates.isValid(booking.start_time, 'yyyy-MM-dd')}" th:text="${#dates.format(booking.start_time, 'MM-yyyy')}" class="align-middle"></td>-->
+<!--        <td th:text="${#dates.format(T(java.text.SimpleDateFormat).newSimpleDateFormat('yyyy-MM-dd HH:mm:ss').parse(booking.start_time), 'MM-yyyy')}" class="align-middle"></td>-->
+        <td th:text="${booking.start_time}" class="align-middle"></td>
+        <td th:text="${booking.end_time}" class="align-middle"></td>
         <td th:text="${booking.status}" class="align-middle"></td>
         <td>
 
