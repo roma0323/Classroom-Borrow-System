@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <th:block th:include="head/head :: headerfiles"></th:block>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js}" ></script>
+
+    <script th:inline="javascript">
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var currentDate = new Date().toISOString().split('T')[0];
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialDate: currentDate,
+                initialView: 'timeGridWeek',
+                nowIndicator: true,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                navLinks: true, // can click day/week names to navigate views
+                editable: false ,
+                selectable: false,
+                selectMirror: true,
+                handleWindowResize : true,
+                dayMaxEvents: true, // allow "more" link when too many events
+                events: [[${testJson}]]
+            });
+
+            calendar.render();
+        });
+
+    </script>
+
+    <style>
+
+        body {
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        #calendar {
+            width: 100%;
+            margin:  auto;
+            padding: 10%;
+
+        }
+
+    </style>
+</head>
+<body>
+<header th:insert="navbar/navbar_authority :: header"> </header>
+
+<div id='calendar'></div>
+
+</body>
+</html>
