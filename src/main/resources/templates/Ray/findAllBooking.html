@@ -9,8 +9,8 @@
 <form action="/booking/addNewBooking" method="post"  th:object="${newBooking}">
     <label for="name">name:</label>
     <input type="text" id="name" name="name"  required><br><br>
-    <label for="bookingDate">Booking Date:</label>
-    <input type="date" id="bookingDate" name="bookingDate" required><br><br>
+    <label for="booking_date">Booking Date:</label>
+    <input type="date" id="booking_date" name="booking_date" required><br><br>
 
     <input type="submit" value="Submit">
 </form>
@@ -21,7 +21,7 @@
     <tr>
         <th>ID</th>
         <th>name</th>
-        <th>bookingDate</th>
+        <th>booking_date</th>
 
         <!-- Add more columns based on your entity fields -->
     </tr>
@@ -30,7 +30,7 @@
     <tr th:each="booking : ${bookingList}">
         <td th:text="${booking.id_booking}"></td>
         <td th:text="${booking.name}"></td>
-        <td th:text="${#dates.format(booking.bookingDate, 'yyyy-MM-dd')}"></td> <!-- Format bookingDate -->
+        <td th:text="${#dates.format(booking.booking_date, 'yyyy-MM-dd')}"></td> <!-- Format booking_date -->
 
         <td>
             <form th:action="@{/booking/editBooking}" method="get">
