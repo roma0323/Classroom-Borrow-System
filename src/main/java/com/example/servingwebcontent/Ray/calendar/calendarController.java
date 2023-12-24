@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.google.gson.Gson;
 
 @Controller
 public class calendarController {

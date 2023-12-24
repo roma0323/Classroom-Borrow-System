@@ -1,6 +1,5 @@
 package com.example.servingwebcontent.Ray.calendar;
 
-import com.google.gson.Gson;
 
 public class Events {
     private Long id;
@@ -50,9 +49,4 @@ public class Events {
                 '}';
     }
 
-    // Method to convert to JSON using Gson library
-    public String toJson() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
-    }
 }
