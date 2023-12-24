@@ -7,14 +7,10 @@
 
 <h2>Edit Member</h2>
 
-<form action="/member/editMember" method="post" th:object="${member}">
-    <input type="hidden" th:field="*{id_member}"/>
-
+<!--<form action="/member/editMember" method="post" th:String="${member.email}">-->
+<form action="/member/editMember" method="post" >
     <label for="name">name:</label>
     <input type="text" id="name" name="name"  required><br><br>
-
-    <label for="email">email:</label>
-    <input type="text" id="email" name="email"  required><br><br>
 
     <label for="identity">identity:</label>
     <input type="text" id="identity" name="identity"  required><br><br>

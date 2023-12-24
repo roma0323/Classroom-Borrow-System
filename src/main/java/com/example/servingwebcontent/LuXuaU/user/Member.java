@@ -32,6 +32,10 @@ public class Member {
         this.password = passwordEncoder.encode(this.password);
     }
 
+    @PreUpdate
+    public void preUpdate() {
+        this.password = passwordEncoder.encode(this.password);
+    }
     public Member(long id_member, String name, String email, String identity, String password) {
         this.id_member = id_member;
         this.name = name;

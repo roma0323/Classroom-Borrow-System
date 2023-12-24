@@ -1,4 +1,4 @@
-package com.example.servingwebcontent.LuXuaU.config;
+package com.example.servingwebcontent.LuXuaU.security;
 
 import com.example.servingwebcontent.LuXuaU.user.Member;
 import com.example.servingwebcontent.LuXuaU.user.MemberRepository;
