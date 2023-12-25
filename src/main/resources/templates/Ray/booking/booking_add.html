@@ -24,7 +24,7 @@
         var startTime = new Date(startTimeInput.value);
         var endTime = new Date(endTimeInput.value);
 
-        if (startTime >= endTime) {
+        if (startTime > endTime) {
           alert("End time must be after the start time");
           startTimeInput.value="";
           endTimeInput.value="";
