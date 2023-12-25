@@ -33,7 +33,7 @@ public class Booking {
     private String booking_reason;
 
     @Column(name = "id_classroom")
-    private Integer id_classroom;
+    private long id_classroom;
 
     @Column(name = "booking_date")
     private Date booking_date;
@@ -60,7 +60,7 @@ public class Booking {
     }
 
     public Booking(long id_booking, String name, String identity, String id_student, String email,
-                   String phone, String booking_reason, Integer id_classroom, Date booking_date,
+                   String phone, String booking_reason, long id_classroom, Date booking_date,
                    LocalDateTime start_time, LocalDateTime end_time, String status, Integer id_borrow) {
         this.id_booking = id_booking;
         this.name = name;
@@ -135,11 +135,11 @@ public class Booking {
         this.booking_reason = booking_reason;
     }
 
-    public Integer getId_classroom() {
+    public Long getId_classroom() {
         return id_classroom;
     }
 
-    public void setId_classroom(Integer id_classroom) {
+    public void setId_classroom(long id_classroom) {
         this.id_classroom = id_classroom;
     }
 
