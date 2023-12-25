@@ -66,8 +66,10 @@ public class BookingController {
     public ModelAndView add(@RequestParam(value = "start_time", required = false) String start_time,
                             @RequestParam(value = "end_time", required = false) String end_time) {
         ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_add");
-        modelAndView.addObject("start_time", start_time.substring(0, start_time.length() - 9));
-        modelAndView.addObject("end_time", end_time.substring(0, start_time.length() - 9));
+        if(start_time!=null){
+            modelAndView.addObject("start_time", start_time.substring(0, start_time.length() - 9));
+            modelAndView.addObject("end_time", end_time.substring(0, start_time.length() - 9));
+        }
         return modelAndView;
     }
 
