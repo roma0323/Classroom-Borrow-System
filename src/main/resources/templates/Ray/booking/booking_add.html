@@ -4,6 +4,43 @@
 <head>
   <title>新增預約</title>
   <th:block th:include="head/head :: headerfiles"></th:block>
+
+  <script th:inline="javascript">
+
+    if(document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', afterLoaded);
+    } else {
+      //The DOMContentLoaded event has already fired. Just run the code.
+      afterLoaded();
+    }
+
+    function afterLoaded() {
+      var startTimeInput = document.getElementById("start_time");
+      var endTimeInput = document.getElementById("end_time");
+      startTimeInput.addEventListener("input", validateTime);
+      endTimeInput.addEventListener("input", validateTime);
+
+      function validateTime() {
+        var startTime = new Date(startTimeInput.value);
+        var endTime = new Date(endTimeInput.value);
+
+        if (startTime > endTime) {
+          alert("End time must be after the start time");
+          startTimeInput.value="";
+          endTimeInput.value="";
+          return false;
+        }
+
+        return true;
+      }
+
+    };
+
+
+
+
+  </script>
+
 </head>
 
 <body>
@@ -52,18 +89,13 @@
           <div class="col-8" style="text-align:left;">
             <input type="text" id="booking_reason" name="booking_reason"  required><br><br>
           </div>
-
-<!--          <div class="col-4" style="font-weight:bold; text-align:left;">日期時間</div>-->
-<!--          <div class="col-8" style="text-align:left;">-->
-<!--            <input type="date" id="bookingDate" name="bookingDate"  required><br><br>-->
-<!--          </div>-->
           <div class="col-4" style="font-weight:bold; text-align:left;">開始時間</div>
           <div class="col-8" style="text-align:left;">
-            <input type="datetime-local" id="start_time" name="start_time"  required><br><br>
+            <input th:value="${start_time}" type="datetime-local" id="start_time" name="start_time"  required><br><br>
           </div>
           <div class="col-4" style="font-weight:bold; text-align:left;">結束時間</div>
           <div class="col-8" style="text-align:left;">
-            <input type="datetime-local" id="end_time" name="end_time"  required><br><br>
+            <input th:value="${end_time}" type="datetime-local" id="end_time" name="end_time"  required><br><br>
           </div>
           <div class="col-4" style="font-weight:bold; text-align:left;">借用教室</div>
           <div class="col-8" style="text-align:left;">

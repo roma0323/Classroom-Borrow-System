@@ -19,6 +19,7 @@ public class Booking {
     private long id_booking;
 
     private String name;
+    private String hold_classroom_name;
 
     private String identity;
 
@@ -33,7 +34,7 @@ public class Booking {
     private String booking_reason;
 
     @Column(name = "id_classroom")
-    private Integer id_classroom;
+    private long id_classroom;
 
     @Column(name = "booking_date")
     private Date booking_date;
@@ -59,10 +60,11 @@ public class Booking {
         // Default constructor
     }
 
-    public Booking(long id_booking, String name, String identity, String id_student, String email,
-                   String phone, String booking_reason, Integer id_classroom, Date booking_date,
+    public Booking(long id_booking, String name,String hold_classroom_name, String identity, String id_student, String email,
+                   String phone, String booking_reason, long id_classroom, Date booking_date,
                    LocalDateTime start_time, LocalDateTime end_time, String status, Integer id_borrow) {
         this.id_booking = id_booking;
+        this.hold_classroom_name = hold_classroom_name;
         this.name = name;
         this.identity = identity;
         this.id_student = id_student;
@@ -86,6 +88,14 @@ public class Booking {
         this.id_booking = id_booking;
     }
 
+
+    public String getHold_classroom_name() {
+        return hold_classroom_name;
+    }
+
+    public void setHold_classroom_name(String hold_classroom_name) {
+        this.hold_classroom_name = hold_classroom_name;
+    }
 
     public String getName() {
         return name;
@@ -135,11 +145,11 @@ public class Booking {
         this.booking_reason = booking_reason;
     }
 
-    public Integer getId_classroom() {
+    public Long getId_classroom() {
         return id_classroom;
     }
 
-    public void setId_classroom(Integer id_classroom) {
+    public void setId_classroom(long id_classroom) {
         this.id_classroom = id_classroom;
     }
 
@@ -191,7 +201,8 @@ public class Booking {
         return "Booking{" +
                 "id_booking=" + id_booking +
                 ", name='" + name + '\'' +
-                ", identity='" + identity + '\'' +
+                ", name='" + name + '\'' +
+                ", hold_classroom_name='" + hold_classroom_name + '\'' +
                 ", id_student='" + id_student + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +

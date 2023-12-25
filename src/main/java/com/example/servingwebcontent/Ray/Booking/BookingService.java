@@ -32,22 +32,26 @@ public class BookingService {
     }
 
     public Optional<Booking> findById(Long id_booking){
-        System.out.println(bookingRepository.findById(id_booking));
-        System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkk");
-
         return bookingRepository.findById(id_booking);
     }
 
-    public void consent_apply(Long id_booking){
-//        System.out.println(bookingRepository.findById(id_booking));
-        Optional<Booking> optionalEquipment = bookingRepository.findById(id_booking);
-        Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
-        assert booking != null;
-        booking.setStatus("同意");
-        bookingRepository.save(booking);
-//        System.out.println(bookingRepository.findById(id_booking));
-
+    public boolean tell_overlap(Booking newBooking,Booking existingBooking){
+        return newBooking.getStart_time().isAfter(existingBooking.getEnd_time())|| newBooking.getEnd_time().isBefore(existingBooking.getStart_time())||newBooking.getStart_time().isEqual(existingBooking.getEnd_time())|| newBooking.getEnd_time().isEqual(existingBooking.getStart_time());
     }
-
+//    public  LocalDateTime DateTimeFormattingExample (){
+//            // Assuming you have a LocalDateTime object representing December 25, 2023, at 10:31 PM
+//            LocalDateTime dateTime = LocalDateTime.parse("2023-12-25T22:31");
+//
+//            // Define the desired format pattern
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd HH:mm");
+//
+//            // Format the LocalDateTime object using the defined formatter
+//            String formattedDateTime = dateTime.format(formatter);
+//
+//            // Display the formatted date-time
+//            System.out.println("Formatted Date-Time: " + formattedDateTime);
+//            return formattedDateTime
+//
+//    }
 
 }
