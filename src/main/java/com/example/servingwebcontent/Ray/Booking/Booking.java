@@ -1,7 +1,11 @@
 package com.example.servingwebcontent.Ray.Booking;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
+
+
 
 @Entity
 @Table(name = "Booking")
@@ -35,10 +39,10 @@ public class Booking {
     private Date booking_date;
 
     @Column(name = "start_time")
-    private String start_time;
+    private LocalDateTime start_time;
 
     @Column(name = "end_time")
-    private String end_time;
+    private LocalDateTime end_time;
 
     @Column(name = "status")
     private String status;
@@ -57,7 +61,7 @@ public class Booking {
 
     public Booking(long id_booking, String name, String identity, String id_student, String email,
                    String phone, String booking_reason, Integer id_classroom, Date booking_date,
-                   String start_time, String end_time, String status, Integer id_borrow) {
+                   LocalDateTime start_time, LocalDateTime end_time, String status, Integer id_borrow) {
         this.id_booking = id_booking;
         this.name = name;
         this.identity = identity;
@@ -147,19 +151,19 @@ public class Booking {
         this.booking_date = booking_date;
     }
 
-    public String getStart_time() {
+    public LocalDateTime getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(String start_time) {
+    public void setStart_time(LocalDateTime start_time) {
         this.start_time = start_time;
     }
 
-    public String getEnd_time() {
+    public LocalDateTime getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(String end_time) {
+    public void setEnd_time(LocalDateTime end_time) {
         this.end_time = end_time;
     }
 

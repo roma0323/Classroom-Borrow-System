@@ -1,18 +1,15 @@
 package com.example.servingwebcontent.Ray.Booking;
 
 
-import com.example.servingwebcontent.Daniel.Classroom.Classroom;
-import com.example.servingwebcontent.Daniel.Classroom.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +18,6 @@ import java.util.Optional;
 public class BookingController {
 
     private final BookingService bookingService;
-    private ClassroomService classroomService;
-
     @Autowired
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
@@ -66,8 +61,31 @@ public class BookingController {
 
     @PostMapping("/add")
     public String add(Booking newBooking){
+        Iterable<Booking> bookingList = bookingService.findAll();
+        for (Booking existingBooking : bookingList) {
+            if (existingBooking.getStatus().equals("同意") && existingBooking.getId_classroom().equals(newBooking.getId_classroom()) ){
+                if (tell_overlap(newBooking,existingBooking)){
+                    System.out.println("nooooooo overlap"+existingBooking.getName());
+                }
+                else{
+                    System.out.println("overlap"+existingBooking.getName());
+                    return "redirect:/booking/add/error";
+
+                }
+            }
+        }
+
+
         bookingService.save(newBooking);
         return "redirect:/booking/list";
+    }
+    @GetMapping("/add/error")
+    public ModelAndView add_error() {
+        ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_add_overlap");
+        return modelAndView;
+    }
+    public boolean tell_overlap(Booking newBooking,Booking existingBooking){
+        return newBooking.getStart_time().isAfter(existingBooking.getEnd_time())|| newBooking.getEnd_time().isBefore(existingBooking.getStart_time())||newBooking.getStart_time().isEqual(existingBooking.getEnd_time())|| newBooking.getEnd_time().isEqual(existingBooking.getStart_time());
     }
 
     @PostMapping("/consent_apply")
@@ -96,8 +114,7 @@ public class BookingController {
         // Retrieve data from MySQL and add it to the model
         Iterable<Booking> bookingList = bookingService.findAll();
         modelAndView.addObject("bookingList", bookingList);
-//        Iterable<OtherTableData> otherTableData = otherTableService.findAll(); // Change this line as per your service method
-//        modelAndView.addObject("otherTableData", otherTableData);
+
         return modelAndView;
 
     }
@@ -109,16 +126,6 @@ public class BookingController {
         bookingService.save(newBooking);
         return "redirect:/booking/findAll";
     }
-
-//    @GetMapping("/editBooking")
-//    public ModelAndView editBookingForm(@RequestParam Long id_booking) {
-//        ModelAndView modelAndView = new ModelAndView("booking_detail");
-//        Optional<Booking> optionalEquipment = bookingService.findById(id_booking);
-//        Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
-//        modelAndView.addObject("booking", booking);
-//        return modelAndView;
-//    }
-
 
     @PostMapping("/editBooking")
     public String editBooking(@ModelAttribute Booking updatedBooking) {
