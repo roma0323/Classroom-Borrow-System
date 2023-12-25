@@ -1,6 +1,8 @@
 package com.example.servingwebcontent.Ray.Booking;
 
 
+import com.example.servingwebcontent.Daniel.Classroom.Classroom;
+import com.example.servingwebcontent.Daniel.Classroom.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -18,9 +20,11 @@ import java.util.Optional;
 public class BookingController {
 
     private final BookingService bookingService;
+    private final ClassroomService classroomService;
     @Autowired
-    public BookingController(BookingService bookingService) {
+    public BookingController(BookingService bookingService,ClassroomService classroomService) {
         this.bookingService = bookingService;
+        this.classroomService = classroomService;
     }
 
     @InitBinder
@@ -32,12 +36,16 @@ public class BookingController {
     @GetMapping("/list")
     public ModelAndView list() {
         ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_list");
-        // Retrieve data from MySQL and add it to the model
-
         Iterable<Booking> bookingList = bookingService.findAll();
-//        Classroom classroom = classroomService.findById();
+
+        for (Booking booking : bookingList) {
+            Optional<Classroom> optionalClassroom = classroomService.findById(booking.getId_classroom());
+            Classroom classroom = optionalClassroom.orElse(null);
+
+            booking.setHold_classroom_name(classroom.getName());
+        }
+
         modelAndView.addObject("bookingList", bookingList);
-//        modelAndView.addObject("classroom", classroom);
         return modelAndView;
     }
 
@@ -46,8 +54,11 @@ public class BookingController {
         ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_detail");
         Optional<Booking> optionalEquipment = bookingService.findById(id_booking);
         Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
+        Optional<Classroom> optionalClassroom = classroomService.findById(booking.getId_classroom());
+        Classroom classroom = optionalClassroom.orElse(null);
+
+        booking.setHold_classroom_name(classroom.getName());
         modelAndView.addObject("booking", booking);
-        modelAndView.addObject("pass", "通過");
         return modelAndView;
     }
 

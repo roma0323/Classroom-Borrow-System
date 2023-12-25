@@ -19,6 +19,7 @@ public class Booking {
     private long id_booking;
 
     private String name;
+    private String hold_classroom_name;
 
     private String identity;
 
@@ -59,10 +60,11 @@ public class Booking {
         // Default constructor
     }
 
-    public Booking(long id_booking, String name, String identity, String id_student, String email,
+    public Booking(long id_booking, String name,String hold_classroom_name, String identity, String id_student, String email,
                    String phone, String booking_reason, long id_classroom, Date booking_date,
                    LocalDateTime start_time, LocalDateTime end_time, String status, Integer id_borrow) {
         this.id_booking = id_booking;
+        this.hold_classroom_name = hold_classroom_name;
         this.name = name;
         this.identity = identity;
         this.id_student = id_student;
@@ -86,6 +88,14 @@ public class Booking {
         this.id_booking = id_booking;
     }
 
+
+    public String getHold_classroom_name() {
+        return hold_classroom_name;
+    }
+
+    public void setHold_classroom_name(String hold_classroom_name) {
+        this.hold_classroom_name = hold_classroom_name;
+    }
 
     public String getName() {
         return name;
@@ -191,7 +201,8 @@ public class Booking {
         return "Booking{" +
                 "id_booking=" + id_booking +
                 ", name='" + name + '\'' +
-                ", identity='" + identity + '\'' +
+                ", name='" + name + '\'' +
+                ", hold_classroom_name='" + hold_classroom_name + '\'' +
                 ", id_student='" + id_student + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
