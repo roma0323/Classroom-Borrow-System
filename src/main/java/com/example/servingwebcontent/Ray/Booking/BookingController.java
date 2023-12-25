@@ -1,7 +1,6 @@
 package com.example.servingwebcontent.Ray.Booking;
 
 
-import com.example.servingwebcontent.Daniel.Classroom.Classroom;
 import com.example.servingwebcontent.Daniel.Classroom.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -20,11 +19,11 @@ import java.util.Optional;
 public class BookingController {
 
     private final BookingService bookingService;
-    private final ClassroomService classroomService;
+    private ClassroomService classroomService;
+
     @Autowired
-    public BookingController(BookingService bookingService,ClassroomService classroomService) {
+    public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
-        this.classroomService = classroomService;
     }
 
     @InitBinder
@@ -36,16 +35,12 @@ public class BookingController {
     @GetMapping("/list")
     public ModelAndView list() {
         ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_list");
+        // Retrieve data from MySQL and add it to the model
+
         Iterable<Booking> bookingList = bookingService.findAll();
-
-        for (Booking booking : bookingList) {
-            Optional<Classroom> optionalClassroom = classroomService.findById(booking.getId_classroom());
-            Classroom classroom = optionalClassroom.orElse(null);
-
-            booking.setHold_classroom_name(classroom.getName());
-        }
-
+//        Classroom classroom = classroomService.findById();
         modelAndView.addObject("bookingList", bookingList);
+//        modelAndView.addObject("classroom", classroom);
         return modelAndView;
     }
 
@@ -54,71 +49,28 @@ public class BookingController {
         ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_detail");
         Optional<Booking> optionalEquipment = bookingService.findById(id_booking);
         Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
-        Optional<Classroom> optionalClassroom = classroomService.findById(booking.getId_classroom());
-        Classroom classroom = optionalClassroom.orElse(null);
-
-        booking.setHold_classroom_name(classroom.getName());
         modelAndView.addObject("booking", booking);
+        modelAndView.addObject("pass", "通過");
         return modelAndView;
     }
 
     @GetMapping("/add")
-    public ModelAndView add(@RequestParam(value = "start_time", required = false) String start_time,
-                            @RequestParam(value = "end_time", required = false) String end_time) {
+    public ModelAndView add() {
         ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_add");
-        modelAndView.addObject("start_time", start_time.substring(0, start_time.length() - 9));
-        modelAndView.addObject("end_time", end_time.substring(0, start_time.length() - 9));
+        Iterable<Booking> bookingList = bookingService.findAll();
+        modelAndView.addObject("bookingList", bookingList);
         return modelAndView;
     }
 
     @PostMapping("/add")
     public String add(Booking newBooking){
-        Iterable<Booking> bookingList = bookingService.findAll();
-        for (Booking existingBooking : bookingList) {
-            if (existingBooking.getStatus().equals("同意") && existingBooking.getId_classroom().equals(newBooking.getId_classroom()) ){
-                if (bookingService.tell_overlap(newBooking,existingBooking)){
-                    System.out.println("nooooooo overlap"+existingBooking.getName());
-                }
-                else{
-                    System.out.println("overlap"+existingBooking.getName());
-                    return "redirect:/booking/add/error";
-
-                }
-            }
-        }
-
-
         bookingService.save(newBooking);
         return "redirect:/booking/list";
     }
-    @GetMapping("/add/error")
-    public ModelAndView add_error() {
-        ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_add_overlap");
-        return modelAndView;
-    }
-
 
     @PostMapping("/consent_apply")
     public String consent_apply(@RequestParam Long id_booking){
-
-        Optional<Booking> optionalBooking = bookingService.findById(id_booking);
-        Booking booking = optionalBooking.orElse(null); // or handle it in a way that suits your logic
-        assert booking != null;
-
-        Iterable<Booking> bookingList = bookingService.findAll();
-        for (Booking existingBooking : bookingList) {
-            if (existingBooking.getStatus().equals("同意") && existingBooking.getId_classroom().equals(booking.getId_classroom())) {
-                if (bookingService.tell_overlap(booking, existingBooking)) {
-                    System.out.println("nooooooo overlap" + existingBooking.getName());
-                } else {
-                    System.out.println("overlap" + existingBooking.getName());
-                    return "redirect:/booking/add/error";
-
-                }
-            }
-        }
-        booking.setStatus("同意");
-        bookingService.save(booking);
+        bookingService.consent_apply(id_booking);
         return "redirect:/booking/list";
     }
 
@@ -142,7 +94,8 @@ public class BookingController {
         // Retrieve data from MySQL and add it to the model
         Iterable<Booking> bookingList = bookingService.findAll();
         modelAndView.addObject("bookingList", bookingList);
-
+//        Iterable<OtherTableData> otherTableData = otherTableService.findAll(); // Change this line as per your service method
+//        modelAndView.addObject("otherTableData", otherTableData);
         return modelAndView;
 
     }
@@ -154,6 +107,16 @@ public class BookingController {
         bookingService.save(newBooking);
         return "redirect:/booking/findAll";
     }
+
+//    @GetMapping("/editBooking")
+//    public ModelAndView editBookingForm(@RequestParam Long id_booking) {
+//        ModelAndView modelAndView = new ModelAndView("booking_detail");
+//        Optional<Booking> optionalEquipment = bookingService.findById(id_booking);
+//        Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
+//        modelAndView.addObject("booking", booking);
+//        return modelAndView;
+//    }
+
 
     @PostMapping("/editBooking")
     public String editBooking(@ModelAttribute Booking updatedBooking) {
