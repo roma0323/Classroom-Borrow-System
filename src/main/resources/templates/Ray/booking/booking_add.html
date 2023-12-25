@@ -68,7 +68,7 @@
       <form action="/booking/add" method="post"  th:object="${newBooking}">
         <div class="row mb-3">
 
-          <div th:id='myForm' class="col-4" style="font-weight:bold; text-align:left;">姓名</div>
+          <div class="col-4" style="font-weight:bold; text-align:left;">姓名</div>
           <div class="col-8" style="text-align:left;">
             <input type="text" id="name" name="name"  required><br><br>
           </div>
@@ -91,11 +91,11 @@
           </div>
           <div class="col-4" style="font-weight:bold; text-align:left;">開始時間</div>
           <div class="col-8" style="text-align:left;">
-            <input type="datetime-local" id="start_time" name="start_time"  required><br><br>
+            <input th:value="${start_time}" type="datetime-local" id="start_time" name="start_time"  required><br><br>
           </div>
           <div class="col-4" style="font-weight:bold; text-align:left;">結束時間</div>
           <div class="col-8" style="text-align:left;">
-            <input type="datetime-local" id="end_time" name="end_time"  required><br><br>
+            <input th:value="${end_time}" type="datetime-local" id="end_time" name="end_time"  required><br><br>
           </div>
           <div class="col-4" style="font-weight:bold; text-align:left;">借用教室</div>
           <div class="col-8" style="text-align:left;">

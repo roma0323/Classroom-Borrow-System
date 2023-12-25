@@ -22,8 +22,8 @@
                 },
                 navLinks: true, // can click day/week names to navigate views
                 editable: false ,
-                selectable: false,
-                selectMirror: true,
+                selectable: true,
+                selectMirror: false,
                 handleWindowResize : true,
                 allDaySlot: false,
                 slotEventOverlap: true,
@@ -34,6 +34,11 @@
                 eventColor: '#3F566D',
                 dayMaxEvents: true, // allow "more" link when too many events
                 events: [[${testJson}]],
+                select: function(info) {
+                    // alert('selected ' + info.startStr + ' to ' + info.endStr);
+
+                    window.location.href = '/booking/add?start_time=' + info.startStr +'&end_time=' + info.endStr;
+                },
                 eventClick: function(info) {
                     var eventObj = info.event;
                     var baseUrl = window.location.origin;
