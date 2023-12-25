@@ -1,11 +1,13 @@
 package com.example.servingwebcontent.Ray.calendar;
 
 
+import java.time.LocalDateTime;
+
 public class Events {
     private Long id;
     private String title;
-    private String start;
-    private String end;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
     // Getters and setters
     public Long getId() {
@@ -24,19 +26,19 @@ public class Events {
         this.title = title;
     }
 
-    public String getStart() {
+    public LocalDateTime getStart() {
         return start;
     }
 
-    public void setStart(String start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
 
-    public String getEnd() {
+    public LocalDateTime getEnd() {
         return end;
     }
 
-    public void setEnd(String end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 
