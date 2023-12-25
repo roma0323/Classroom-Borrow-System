@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>新增預約</title>
+    <th:block th:include="head/head :: headerfiles"></th:block>
+    <style>
+        /* Style for the modal */
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            z-index: 999; /* Ensure it's on top of other content */
+        }
+
+        /* Style for the modal content */
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 30%; /* Adjust width as needed */
+        }
+
+        /* Style for the confirm button */
+        .confirm-button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            background-color: #3498db; /* Change color as needed */
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Hover effect for the button */
+        .confirm-button:hover {
+            background-color: #2980b9; /* Change color as needed */
+        }
+    </style>
+    <script th:inline="javascript">
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header th:insert="navbar/navbar_authority :: header"> </header>
+
+<!-- ======= Main ======= -->
+<main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>新增預約</h2>
+            </div>
+        </div>
+    </section>
+    <!-- End Breadcrumbs Section -->
+
+    <!-- Modal Section -->
+    <div class="modal">
+        <div class="modal-content">
+            <h3>此時段已被借出</h3>
+
+
+            <button onclick="goBack()" class="btn btn-primary btn-sm custom-button" >確認</button>
+
+        </div>
+    </div>
+    <!-- End Modal Section -->
+
+</main>
+
+</body>
+
+</html>
+
