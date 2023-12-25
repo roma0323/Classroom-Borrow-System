@@ -4,6 +4,42 @@
 <head>
   <title>新增預約</title>
   <th:block th:include="head/head :: headerfiles"></th:block>
+
+  <script th:inline="javascript">
+
+    if(document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', afterLoaded);
+    } else {
+      //The DOMContentLoaded event has already fired. Just run the code.
+      afterLoaded();
+    }
+
+    function afterLoaded() {
+      var startTimeInput = document.getElementById("start_time");
+      var endTimeInput = document.getElementById("end_time");
+      startTimeInput.addEventListener("input", validateTime);
+      endTimeInput.addEventListener("input", validateTime);
+
+      function validateTime() {
+        var startTime = new Date(startTimeInput.value);
+        var endTime = new Date(endTimeInput.value);
+
+        if (startTime >= endTime) {
+          alert("End time must be after the start time");
+          endTimeInput.value="";
+          return false;
+        }
+
+        return true;
+      }
+
+    };
+
+
+
+
+  </script>
+
 </head>
 
 <body>
@@ -31,7 +67,7 @@
       <form action="/booking/add" method="post"  th:object="${newBooking}">
         <div class="row mb-3">
 
-          <div class="col-4" style="font-weight:bold; text-align:left;">姓名</div>
+          <div th:id='myForm' class="col-4" style="font-weight:bold; text-align:left;">姓名</div>
           <div class="col-8" style="text-align:left;">
             <input type="text" id="name" name="name"  required><br><br>
           </div>
@@ -52,11 +88,6 @@
           <div class="col-8" style="text-align:left;">
             <input type="text" id="booking_reason" name="booking_reason"  required><br><br>
           </div>
-
-<!--          <div class="col-4" style="font-weight:bold; text-align:left;">日期時間</div>-->
-<!--          <div class="col-8" style="text-align:left;">-->
-<!--            <input type="date" id="bookingDate" name="bookingDate"  required><br><br>-->
-<!--          </div>-->
           <div class="col-4" style="font-weight:bold; text-align:left;">開始時間</div>
           <div class="col-8" style="text-align:left;">
             <input type="datetime-local" id="start_time" name="start_time"  required><br><br>
