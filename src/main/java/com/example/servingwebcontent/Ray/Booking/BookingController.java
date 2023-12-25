@@ -64,7 +64,7 @@ public class BookingController {
         Iterable<Booking> bookingList = bookingService.findAll();
         for (Booking existingBooking : bookingList) {
             if (existingBooking.getStatus().equals("同意") && existingBooking.getId_classroom().equals(newBooking.getId_classroom()) ){
-                if (tell_overlap(newBooking,existingBooking)){
+                if (bookingService.tell_overlap(newBooking,existingBooking)){
                     System.out.println("nooooooo overlap"+existingBooking.getName());
                 }
                 else{
@@ -84,13 +84,29 @@ public class BookingController {
         ModelAndView modelAndView = new ModelAndView("Ray/booking/booking_add_overlap");
         return modelAndView;
     }
-    public boolean tell_overlap(Booking newBooking,Booking existingBooking){
-        return newBooking.getStart_time().isAfter(existingBooking.getEnd_time())|| newBooking.getEnd_time().isBefore(existingBooking.getStart_time())||newBooking.getStart_time().isEqual(existingBooking.getEnd_time())|| newBooking.getEnd_time().isEqual(existingBooking.getStart_time());
-    }
+
 
     @PostMapping("/consent_apply")
     public String consent_apply(@RequestParam Long id_booking){
-        bookingService.consent_apply(id_booking);
+
+        Optional<Booking> optionalBooking = bookingService.findById(id_booking);
+        Booking booking = optionalBooking.orElse(null); // or handle it in a way that suits your logic
+        assert booking != null;
+
+        Iterable<Booking> bookingList = bookingService.findAll();
+        for (Booking existingBooking : bookingList) {
+            if (existingBooking.getStatus().equals("同意") && existingBooking.getId_classroom().equals(booking.getId_classroom())) {
+                if (bookingService.tell_overlap(booking, existingBooking)) {
+                    System.out.println("nooooooo overlap" + existingBooking.getName());
+                } else {
+                    System.out.println("overlap" + existingBooking.getName());
+                    return "redirect:/booking/add/error";
+
+                }
+            }
+        }
+        booking.setStatus("同意");
+        bookingService.save(booking);
         return "redirect:/booking/list";
     }
 

@@ -38,15 +38,8 @@ public class BookingService {
         return bookingRepository.findById(id_booking);
     }
 
-    public void consent_apply(Long id_booking){
-//        System.out.println(bookingRepository.findById(id_booking));
-        Optional<Booking> optionalEquipment = bookingRepository.findById(id_booking);
-        Booking booking = optionalEquipment.orElse(null); // or handle it in a way that suits your logic
-        assert booking != null;
-        booking.setStatus("同意");
-        bookingRepository.save(booking);
-//        System.out.println(bookingRepository.findById(id_booking));
-
+    public boolean tell_overlap(Booking newBooking,Booking existingBooking){
+        return newBooking.getStart_time().isAfter(existingBooking.getEnd_time())|| newBooking.getEnd_time().isBefore(existingBooking.getStart_time())||newBooking.getStart_time().isEqual(existingBooking.getEnd_time())|| newBooking.getEnd_time().isEqual(existingBooking.getStart_time());
     }
 
 

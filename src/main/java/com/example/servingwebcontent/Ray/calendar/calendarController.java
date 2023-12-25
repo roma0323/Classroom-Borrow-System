@@ -30,15 +30,15 @@ public class calendarController {
         modelAndView.addObject("bookingList", bookingList);
         List<Events> EventsList = new ArrayList<>();
         for (Booking booking : bookingList) {
-            Events event = new Events();
-            System.out.println(booking.getName());
+            if(booking.getStatus().equals("同意")){
+                Events event = new Events();
+                event.setTitle(booking.getName());
+                event.setId(booking.getId_booking());
+                event.setStart(booking.getStart_time());
+                event.setEnd(booking.getEnd_time());
+                EventsList.add(event);
+            }
 
-            event.setTitle(booking.getName());
-            event.setId(booking.getId_booking());
-            event.setStart(booking.getStart_time());
-            event.setEnd(booking.getEnd_time());
-            EventsList.add(event);
-            System.out.println("end"+event.getEnd());
 
         }
         modelAndView.addObject("testJson",EventsList);
