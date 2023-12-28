@@ -35,7 +35,6 @@
                     <p class = "display-6">基本資料</p>
                 </div>
                 <div class="col-5 text-end">
-                    <button class="custom-button ms-2" disabled>借出</button>
                     <form id="returnForm" th:action="@{'/borrow/return'}" method="get">
                         <input type="hidden" name="borrowId" th:value="${borrow.id_borrow}">
                         <button type="button" class="custom-button ms-2" onclick="submitReturnForm()">歸還</button>

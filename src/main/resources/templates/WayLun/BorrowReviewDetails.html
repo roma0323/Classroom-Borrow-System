@@ -35,7 +35,10 @@
                 <p class = "display-6">基本資料</p>
             </div>
             <div class="col-5 text-end">
-                <button class="custom-button ms-2" disabled>通過</button>
+                <form id="approveForm" th:action="@{'/borrow/approveBorrow'}" method="get">
+                    <input type="hidden" name="borrowId" th:value="${borrow.id_borrow}">
+                    <button type="button" class="custom-button ms-2" onclick="submitApproveForm()">通過</button>
+                </form>
                 <form id="editForm" th:action="@{'/borrow/editBorrow'}" method="get">
                     <input type="hidden" name="borrowId" th:value="${borrow.id_borrow}">
                     <button type="button" class="custom-button ms-2" onclick="submitEditForm()">編輯</button>
@@ -108,7 +111,7 @@
                         <!--td class="border-0 ">陳韋州</td-->
                         <!--td class="border-0"></td-->
                         <td class="border-0">
-                            <a class="custom-button" th:href="@{'/borrow/rejectBorrow?borrowId=' + ${borrow.id_borrow}}">拒絕</a>
+                            <a class="custom-button" th:href="@{'/borrow/deleteBorrow?borrowId=' + ${borrow.id_borrow}}">刪除</a>
                         </td>
                     </tr>
                     </tbody>
@@ -161,7 +164,7 @@
                             <span th:if="${borrowEquipment.returnby eq '已歸還'}" th:text="${borrow.timestamp}"></span>
                         </td>
                         <td class="border-0">
-                            <a class="custom-button" th:href="@{'/borrow/rejectBorrow?borrowId=' + ${borrow.id_borrow}}">拒絕</a>
+                            <a class="custom-button" th:href="@{'/borrow/rejectBorrow?borrowId=' + ${borrow.id_borrow}}">刪除</a>
                         </td>
                     </tr>
                     <!-- Additional rows as needed -->
@@ -184,8 +187,8 @@
 <script type="text/javascript" th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
 
 <script>
-    function submitReturnForm() {
-        document.getElementById('returnForm').submit();
+    function submitApproveForm() {
+        document.getElementById('approveForm').submit();
     }
 
     function submitEditForm() {
