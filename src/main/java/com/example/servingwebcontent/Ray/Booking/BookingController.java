@@ -3,6 +3,8 @@ package com.example.servingwebcontent.Ray.Booking;
 
 import com.example.servingwebcontent.Daniel.Classroom.Classroom;
 import com.example.servingwebcontent.Daniel.Classroom.ClassroomService;
+import com.example.servingwebcontent.LuXuaU.user.MemberService;
+import com.example.servingwebcontent.LuXuaU.user.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
@@ -23,10 +25,12 @@ public class BookingController {
 
     private final BookingService bookingService;
     private final ClassroomService classroomService;
+    private final MemberService memberService;
     @Autowired
-    public BookingController(BookingService bookingService,ClassroomService classroomService) {
+    public BookingController(BookingService bookingService,ClassroomService classroomService, MemberService memberService) {
         this.bookingService = bookingService;
         this.classroomService = classroomService;
+        this.memberService = memberService;
     }
 
     @InitBinder
@@ -61,6 +65,19 @@ public class BookingController {
 
         booking.setHold_classroom_name(classroom.getName());
         modelAndView.addObject("booking", booking);
+
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String memberEmail = authentication.getName();
+
+        if(memberEmail.equals("anonymousUser")){
+            modelAndView.addObject("identity", "");
+            return modelAndView;
+        }
+        Member member = memberService.findByEmail(memberEmail);
+        modelAndView.addObject("identity", member.getIdentity());
+
+
         return modelAndView;
     }
 

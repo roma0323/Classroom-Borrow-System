@@ -67,7 +67,7 @@
 
             &nbsp;
 
-            <div class="d-flex justify-content-center" >
+            <div class="d-flex justify-content-center" th:if="${identity == 'ROLE_ADMIN'}">
                 <form action="/booking/consent_apply" method="post" th:object="${booking}" style="margin-right: 5%">
                     <input type="hidden" name="id_booking" th:value="${booking.id_booking}"/>
                     <button type="submit" class="btn btn-primary my-2 btn-sm custom-button">同意</button>
