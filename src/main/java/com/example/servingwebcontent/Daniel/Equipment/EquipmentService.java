@@ -22,7 +22,9 @@ public class EquipmentService {
     public void save(Equipment newEquipment){
         equipmentRepository.save(newEquipment);
     }
-
+    public void updateEquipment(Equipment equipment) {
+        equipmentRepository.save(equipment); // save method works for both creating and updating
+    }
     public void deleteById(Long equipmentId){
         equipmentRepository.deleteById(equipmentId);
     }

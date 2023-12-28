@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Find a member</title>
+</head>
+<body>
+
+    <h2>  Find a member  </h2>
+
+    <form th:action="@{/member/findMember}" method="post"  th:String="${email}">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" placeholder="Enter email" required>
+
+        <button type="submit">Find Member</button>
+    </form>
+
+    <div th:if="${member != null}">
+        <p>Found Member:</p>
+        <p th:text="'Name: ' + ${member.getName()}"></p>
+        <p th:text="'Identity: ' + ${member.getIdentity()}"></p>
+        <p th:text="'email: ' + ${member.getEmail()}"></p>
+        <p th:text="'password: ' + ${member.getPassword()}"></p>
+    </div>
+
+    <div th:if="${member == null}">
+        <p>查無此人</p>
+    </div>
+</body>
+</html>

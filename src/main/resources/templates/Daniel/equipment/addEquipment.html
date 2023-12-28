@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>新增設備</title>
+    <th:block th:include="head/head :: headerfiles"></th:block>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header th:insert="navbar/navbar_authority :: header"> </header>
+
+<!-- ======= Main ======= -->
+<main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>新增設備</h2>
+                <ol>
+                    <li><a href="index.html">設備管理</a></li>
+                    <li>新增設備</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <!-- End Breadcrumbs Section -->
+
+    <section class="addEquipment">
+        <div class="container">
+            <form action="/equipment/addNewEquipment" method="post" th:object="${newEquipment}">
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="category" class="form-label">分類</label>
+                    <select class="form-select" id="category" name="category" onchange="toggleCustomInput()">
+                        <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
+                        <option value="other">其他 (請指定)</option>
+                    </select>
+                    <input type="text" id="customCategory" name="customCategory" style="display:none;" class="form-control mt-2" placeholder="請輸入分類" oninput="updateCategoryValue()"/>
+                </div>
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="label" class="form-label">編號</label>
+                    <input type="text" class="form-control" id = "label" name = "label">
+                </div>
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="description" class="form-label">描述</label>
+                    <input type="text" class="form-control" id = "description" name ="description">
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type= "submit" value= "submit" class="btn btn-primary custom-button">新增設備</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+
+<script>
+    // function showCustomInput() {
+    //     var categorySelect = document.getElementById("category");
+    //     var customInput = document.getElementById("customCategory");
+    //     if (categorySelect.value === "other") {
+    //         customInput.style.display = "block";
+    //     } else {
+    //         customInput.style.display = "none";
+    //     }
+    // }
+
+    function toggleCustomInput() {
+    var categorySelect = document.getElementById("category");
+    var customInput = document.getElementById("customCategory");
+    if (categorySelect.value === "other") {
+        customInput.style.display = "block";
+        customInput.value = ""; // Clear the custom input when "Other" is selected
+        categorySelect.value = "other";
+    } else {
+        customInput.style.display = "none";
+    }
+}
+
+function updateCategoryValue() {
+    var customInput = document.getElementById("customCategory");
+    var categorySelect = document.getElementById("category");
+
+    // Check if the custom option already exists; if not, create it
+    var customOption = document.getElementById("customOption");
+    if (!customOption) {
+        customOption = document.createElement("option");
+        customOption.id = "customOption";
+        categorySelect.appendChild(customOption);
+    }
+
+    // Set the value and text of the custom option to the input's value
+    customOption.value = customInput.value;
+    customOption.text = customInput.value;
+    customOption.selected = true;
+}
+
+</script>
+
+<!-- Vendor JS Files -->
+<script type="text/javascript" th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/aos/aos.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+
+</body>
+
+</html>

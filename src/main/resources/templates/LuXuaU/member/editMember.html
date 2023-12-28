@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Booking</title>
+</head>
+<body>
+
+<h2>Edit Member</h2>
+
+<!--<form action="/member/editMember" method="post" th:String="${member.email}">-->
+<form action="/member/editMember" method="post" >
+    <label for="name">name:</label>
+    <input type="text" id="name" name="name"  required><br><br>
+
+    <label for="identity">identity:</label>
+    <input type="text" id="identity" name="identity"  required><br><br>
+
+    <label for="password">password:</label>
+    <input type="text" id="password" name="password" required><br><br>
+
+    <input type="submit" value="Save Change">
+</form>
+
+</body>
+</html>

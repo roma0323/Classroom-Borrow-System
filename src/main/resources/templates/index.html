@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>$Title$</title>
+</head>
+<body >
+  <h2>Home pageeee</h2>
+
+  <div th:if="${identity == 'ROLE_ADMIN'}">
+    <h3>equipment</h3>
+    <p>Go to <a href="equipment/findAll">find all equipments</a></p>
+    <p>Go to <a href="equipment/list">list</a></p>
+    <p>Go to <a href="equipment/addNewEquipment">addNewEquipment</a></p>
+  </div>
+
+  <h3>member</h3>
+  <p>Go to <a href="/login">LOGIN</a></p>
+  <p>Go to <a href="member/findAll">find all member</a></p>
+  <p>Go to <a href="member/editMember">edit yourself</a></p>
+  <p>Go to <a href="member/findMember">find a member</a></p>
+
+  <h3>classroom</h3>
+  <p>Go to <a href="classroom/findAll">find all classroom</a></p>
+
+  <h3>borrow</h3>
+  <p>Go to <a href="borrow/findAll">find all borrow</a></p>
+
+  <h3>booking</h3>
+  <p>Go to <a href="booking/add">add booking</a></p>
+  <p>Go to <a href="booking/list">booking list</a></p>
+
+  <form th:action="@{/logout}" method="post" th:if="${identity != ''}">
+    <input type="submit" value="Log out" />
+  </form>
+
+</body>
+</html>
