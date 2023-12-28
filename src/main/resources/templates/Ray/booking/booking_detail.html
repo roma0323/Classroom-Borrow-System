@@ -64,16 +64,29 @@
                 <div class="col-4" style="font-weight:bold; text-align:left;">申請狀態</div>
                 <div th:text="${booking.status}" class="col-8" style="text-align:left;"></div>
             </div>
+
             &nbsp;
 
-            <div class="d-flex justify-content-center">
-                <form action="/booking/consent_apply" method="post" th:object="${booking}">
+            <div class="d-flex justify-content-center" >
+                <form action="/booking/consent_apply" method="post" th:object="${booking}" style="margin-right: 5%">
                     <input type="hidden" name="id_booking" th:value="${booking.id_booking}"/>
-                    <button type="submit" class="btn btn-primary btn-sm custom-button">同意</button>
+                    <button type="submit" class="btn btn-primary my-2 btn-sm custom-button">同意</button>
                 </form>
-                <form th:action="@{/booking/deleteBooking}" method="post">
+                <form th:action="@{/booking/deleteBooking}" method="post"  >
                     <input type="hidden" name="id_booking" th:value="${booking.id_booking}">
+                    <input type="hidden" name="email" th:value="${booking.email}">
+                    <input type="hidden" name="hold_classroom_name" th:value="${booking.hold_classroom_name}">
+                    <input type="hidden" name="start_time" th:value="${booking.start_time}">
+                    <input type="hidden" name="end_time" th:value="${booking.end_time}">
                     <button type="submit" class="btn btn-primary btn-sm custom-button" >刪除</button>
+
+<!--                    <label for="emailType">刪除原因</label>-->
+                    <select id="emailType" name="emailType" style="border-radius: 10px;padding: 8px 24px 8px 10px;">
+                        <option value="時段已被他人預約">時段已被他人預約</option>
+                        <option value="申請理由不當">申請理由不當</option>
+                        <option value="不想借你">不想借你</option>
+                        <!-- Add more options as needed -->
+                    </select>
                 </form>
             </div>
 
