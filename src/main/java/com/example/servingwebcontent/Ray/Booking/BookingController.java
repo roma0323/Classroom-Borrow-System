@@ -5,6 +5,9 @@ import com.example.servingwebcontent.Daniel.Classroom.Classroom;
 import com.example.servingwebcontent.Daniel.Classroom.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -73,9 +76,10 @@ public class BookingController {
         Iterable<Classroom> classroomList = classroomService.findAll();
         modelAndView.addObject("classroomList", classroomList);
 
-//        SecurityContext securityContext = SecurityContextHolder.getContext();
-//        Authentication authentication = securityContext.getAuthentication();
-//        String memberEmail = authentication.getName();
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String memberEmail = authentication.getName();
+        modelAndView.addObject("memberEmail", memberEmail);
 
         return modelAndView;
     }
@@ -95,8 +99,6 @@ public class BookingController {
                 }
             }
         }
-
-
         bookingService.save(newBooking);
         return "redirect:/booking/list";
     }
