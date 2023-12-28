@@ -99,13 +99,20 @@
           </div>
           <div class="col-4" style="font-weight:bold; text-align:left;">借用教室</div>
           <div class="col-8" style="text-align:left;">
+<!--            <select id="id_classroom" name="id_classroom" required>-->
+<!--              <option value="">請選擇教室</option>-->
+<!--              <option value="1">017</option>-->
+<!--              <option value="2">105</option>-->
+<!--              <option value="3">107</option>-->
+<!--              &lt;!&ndash; Add more options as needed &ndash;&gt;-->
+<!--            </select>-->
+
             <select id="id_classroom" name="id_classroom" required>
-              <option value="">請選擇教室</option>
-              <option value="1">017</option>
-              <option value="2">105</option>
-              <option value="3">107</option>
-              <!-- Add more options as needed -->
+              <option value="">--請選擇教室--</option>
+              <option th:each="category : ${classroomList}" th:value="${category.id_classroom}" th:text="${category.name}"></option>
             </select>
+
+
           </div>
         </div>
 

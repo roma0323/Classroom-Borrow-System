@@ -70,6 +70,13 @@ public class BookingController {
             modelAndView.addObject("start_time", start_time.substring(0, start_time.length() - 9));
             modelAndView.addObject("end_time", end_time.substring(0, start_time.length() - 9));
         }
+        Iterable<Classroom> classroomList = classroomService.findAll();
+        modelAndView.addObject("classroomList", classroomList);
+
+//        SecurityContext securityContext = SecurityContextHolder.getContext();
+//        Authentication authentication = securityContext.getAuthentication();
+//        String memberEmail = authentication.getName();
+
         return modelAndView;
     }
 
