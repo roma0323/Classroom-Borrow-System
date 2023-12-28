@@ -59,8 +59,15 @@ public class MemberController {
 
     @PostMapping("/resetPassword")
     public String resetPassword(@RequestParam String email) {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String memberEmail = authentication.getName();
         memberService.resetPassword(email);
-        return "redirect:/login";
+
+        if(memberEmail.equals(email)) return "redirect:/login";
+        else return "redirect:/member/findAll";
+//        memberService.resetPassword(email);
+//        return "redirect:/login";
     }
 
     @GetMapping("/findMember")

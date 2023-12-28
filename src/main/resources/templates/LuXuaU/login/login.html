@@ -28,28 +28,29 @@
     <!-- End Breadcrumbs Section -->
     <section class="login">
         <div class="container">
-            <form th:action="@{/login}" method="post">
-                <div>
-                    <input type="text" name="username" placeholder="Username"/>
-                </div>
-                <div>
-                    <input type="password" name="password" placeholder="Password"/>
-                </div>
-                <input type="submit" value="Log in" />
-            </form>
 <!--            <form th:action="@{/login}" method="post">-->
-<!--                <div class="mb-4 text-center mx-auto" style="width: 50%;">-->
-<!--                    <label for="emailAddress" class="form-label">電子郵件</label>-->
-<!--                    <input type="email" class="form-control" id="emailAddress" name="username" placeholder="Username"/>-->
+<!--                <div>-->
+<!--                    <input type="text" name="username" placeholder="Username"/>-->
 <!--                </div>-->
-<!--                <div class="mb-4 text-center mx-auto" style="width: 50%;">-->
-<!--                    <label for="password" class="form-label">密碼</label>-->
-<!--                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>-->
+<!--                <div>-->
+<!--                    <input type="password" name="password" placeholder="Password"/>-->
 <!--                </div>-->
-<!--                <div class="d-flex justify-content-center">-->
-<!--                    <button type="submit" class="btn btn-primary custom-button">登入</button>-->
-<!--                </div>-->
+<!--                <input type="submit" value="Log in" />-->
 <!--            </form>-->
+            <form th:action="@{/login}" method="post">
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="emailAddress" class="form-label">電子郵件</label>
+                    <input type="email" class="form-control" id="emailAddress" name="username" placeholder="Username"/>
+                </div>
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="password" class="form-label">密碼</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary custom-button">登入</button>
+                </div>
+            </form>
+            <p><a href="/member/resetPassword">Forget Passsword T_T</a></p>
         </div>
     </section>
 </main>
