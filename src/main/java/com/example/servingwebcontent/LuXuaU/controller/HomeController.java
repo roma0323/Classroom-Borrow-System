@@ -27,7 +27,7 @@ public class HomeController {
 
     @GetMapping("/")
     public ModelAndView greeting() {
-        ModelAndView modelAndView = new ModelAndView("/index");
+        ModelAndView modelAndView = new ModelAndView("Ray/calendar/test_calendar");
         // Get distinct category
 
         SecurityContext securityContext = SecurityContextHolder.getContext();
