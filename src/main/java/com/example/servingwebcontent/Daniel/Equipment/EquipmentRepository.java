@@ -14,4 +14,7 @@ public interface EquipmentRepository extends JpaRepository<Equipment, Long>{
     @Query("SELECT DISTINCT e.category FROM Equipment e")
     List<String> findDistinctCategories();
 
+    @Query("SELECT e.label FROM Equipment e WHERE e.category = ?1")
+    List<String> findLabelsByCategory(String category);
+
 }

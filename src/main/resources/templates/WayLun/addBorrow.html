@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>借用申請</title>
+    <th:block th:include="head/head :: headerfiles"></th:block>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header th:insert="navbar/navbar_authority :: header"> </header>
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4>借用申請</h4>
+                <ol>
+                    <li>教室/設備申請</li>
+                    <li>借用申請</li>
+                    <li>編輯借用</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <!-- End Breadcrumbs Section -->
+
+    <section class="borrow">
+        <div class="container">
+            <form action="/borrow/addBorrow" method="post" th:object="${borrowForm}">
+                <!-- Borrow Fields -->
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="name" class="form-label">姓名</label>
+                    <input type="text" class="form-label" id="name" name="borrow.name" required>
+                </div>
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="identity" class="form-label">身分</label>
+                    <select class="form-select" id="identity" name="borrow.identity">
+                        <option value="學生">學生</option>
+                        <option value="教職員">教職員</option>
+                    </select>
+                </div>
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="phone" class="form-label">手機號碼</label>
+                    <input type="text" class="form-control" id="phone" name="borrow.phone">
+                </div>
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="department_grade" class="form-label">系級</label>
+                    <select class="form-select" id="department_grade" name="borrow.department_grade">
+                        <option value="資管一">資管一</option>
+                        <option value="資管二">資管二</option>
+                        <option value="資管三">資管三</option>
+                        <option value="資管四">資管四</option>
+                        <option value="資管碩一">資管碩一</option>
+                        <option value="資管碩二">資管碩二</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="identitycard" class="form-label">抵用證件</label>
+                    <select class="form-select" id="identitycard" name="borrow.identitycard">
+                        <option value="身分證">身分證</option>
+                        <option value="學生證">學生證</option>
+                        <option value="駕照">駕照</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="purpose" class="form-label">借用目的</label>
+                    <input type="text" class="form-control" id="purpose" name="borrowClassroom.purpose">
+                </div>
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="teacher" class="form-label">教師</label>
+                    <input type="text" class="form-control" id="teacher" name="borrowClassroom.teacher">
+                </div>
+                <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                    <label for="return_time" class="form-label">預計歸還日期</label>
+                    <input type="date" class="form-control" id="return_time" name="borrowEquipment.return_time">
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-4 text-center mx-auto">
+                        <label for="classroom" class="form-label">借用教室</label>
+                        <select class="form-select" id="classroom" name="selectedClassroomId">
+                            <option value="">--請選擇--</option>
+                            <option th:each="classroom : ${classrooms}" th:value="${classroom.id_classroom}" th:text="${classroom.name}"></option>
+                        </select>
+                    </div>
+                    <!--div class="col-md-6 mb-4 text-center mx-auto">
+                        <label for="" class="form-label">借用鑰匙</label>
+                        <select class="form-select" id="key">
+                            <option value="">--請選擇--</option>
+                            <option th:each="classroom : ${classrooms}" th:value="${classroom.idClassroom}" th:text="${classroom.name}"></option>
+                        </select>
+                    </div-->
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-4 text-center mx-auto" style="width: 50%;">
+                        <label for="equipment" class="form-label">借用設備</label>
+                        <select class="form-select" id="equipment" name="selectedEquipmentId">
+                            <option value="">--請選擇--</option>
+                            <option th:each="equipment : ${equipments}" th:value="${equipment.id_equipment}" th:text="${equipment.category} + ${equipment.label}"></option>
+                        </select>
+                    </div>
+                    <!--div class="col-md-6 mb-4 text-center mx-auto" style="width: 50%;">
+                        <label for="label1" class="form-label">借用設備｜編號</label>
+                        <select class="form-select" id="label1"></select>
+                    </div-->
+                </div>
+                <div>
+                    <div class="mb-4 text-center mx-auto" style="width: 50%;">
+                        <label for="note" class="form-label">備註</label>
+                        <input type="text" class="form-control" id="note" name="borrowClassroom.note">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="add" class="btn btn-primary custom-button">送出借用申請</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script type="text/javascript" th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/aos/aos.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+
+<!-- Template Main JS File -->
+<script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+
+</body>
+
+</html>

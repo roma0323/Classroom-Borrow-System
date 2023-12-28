@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>設備借用紀錄</title>
+    <title>借用中清單</title>
     <th:block th:include="head/head :: headerfiles"></th:block>
 </head>
 
@@ -18,10 +18,10 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>設備借用紀錄</h2>
+                <h2>借用中清單</h2>
                 <ol>
                     <li>教室/設備借用</li>
-                    <li>設備借用紀錄</li>
+                    <li>借用中清單</li>
                 </ol>
             </div>
         </div>
@@ -47,21 +47,25 @@
                     </thead>
                     <!--這邊應該要丟參數吧？-->
                     <tbody>
-                    <tr th:each="borrowEquipment : ${borrowEList}">
-                        <th:block th:if="${borrowEquipment.equipment.category == category}">
-                            <th scope="row" class="align-middle" th:text="${borrowEquipmentStat.borrow.id_borrow}"></th>
-                            <td class="align-middle" th:text="${borrowEquipmentStat.borrow.timestamp}"></td>
-                            <td class="align-middle" th:text="${borrowEquipmentStat.borrow.name}"></td>
-                            <td class="align-middle" th:text="${borrowEquipmentStat.borrow.identity}"></td>
-                            <td class="align-middle" th:text="${borrowEquipmentStat.borrow.department_grade}"></td>
-                            <td class="align-middle" th:text="${borrowEquipmentStat.borrow.identitycard}"></td>
-                            <td class="align-middle" th:text="${borrowEquipmentStat.borrow.status}"></td>
-                            <td>
-                                <div class="d-flex justify-content-center">
-                                    <a type="add" class="btn btn-primary btn-sm custom-button" th:href="@{/borrow/borrowDetails/{id}(id=${borrow.id_borrow})}">查看詳細資料</a>
-                                </div>
-                            </td>
-                        </th:block>
+                    <tr th:each="borrow : ${borrowList}">
+                        <th scope="row" class="align-middle" th:text="${borrow.id_borrow}"></th>
+                        <td class="align-middle" th:text="${borrow.timestamp}"></td>
+                        <td class="align-middle" th:text="${borrow.name}"></td>
+                        <td class="align-middle" th:text="${borrow.identity}"></td>
+                        <td class="align-middle" th:text="${borrow.department_grade}"></td>
+                        <td class="align-middle" th:text="${borrow.identitycard}"></td>
+                        <td class="align-middle" th:text="${borrow.status}"></td>
+                        <td>
+                            <form id="returnForm" th:action="@{'/borrow/return'}" method="get">
+                                <input type="hidden" name="borrowId" th:value="${borrow.id_borrow}">
+                                <button type="button" class="custom-button ms-2" onclick="submitReturnForm()">歸還</button>
+                            </form>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <a type="add" class="btn btn-primary btn-sm custom-button" th:href="@{/borrow/borrowDetails/{id}(id=${borrow.id_borrow})}">查看詳細資料</a>
+                            </div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -79,6 +83,13 @@
 <script type="text/javascript" th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
 <script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
 <script type="text/javascript" th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+<script>
+    function submitReturnForm() {
+        document.getElementById('returnForm').submit();
+    }
+
+</script>
 
 <!-- Template Main JS File -->
 <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
