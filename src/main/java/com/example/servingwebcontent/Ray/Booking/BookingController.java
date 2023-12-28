@@ -125,7 +125,10 @@ public class BookingController {
     }
 
     @PostMapping("/deleteBooking")
-    public String deleteBooking(@RequestParam Long id_booking) {
+    public String deleteBooking(@RequestParam Long id_booking,@RequestParam String email,@RequestParam String hold_classroom_name,@RequestParam String start_time,@RequestParam String end_time,@RequestParam String emailType) {
+        bookingService.delete_booking_notify(email,hold_classroom_name,start_time,end_time,emailType);
+
+
         bookingService.deleteById(id_booking);
         return "redirect:/booking/list";
     }
