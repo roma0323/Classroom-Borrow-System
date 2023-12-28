@@ -108,7 +108,6 @@
 <!--            </select>-->
 
             <select id="id_classroom" name="id_classroom" required>
-              <option value="">--請選擇教室--</option>
               <option th:each="category : ${classroomList}" th:value="${category.id_classroom}" th:text="${category.name}"></option>
             </select>
 

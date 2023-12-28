@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -142,38 +141,6 @@ public class BookingController {
         return "redirect:/booking/list";
     }
 
-    @GetMapping
-    public List<Booking> getEquipment(){
-        return bookingService.findAll();
-    }
-
-
-
-    @GetMapping("/findAll")
-    public ModelAndView findAll() {
-        ModelAndView modelAndView = new ModelAndView("Ray/findAllBooking");
-
-        // Retrieve data from MySQL and add it to the model
-        Iterable<Booking> bookingList = bookingService.findAll();
-        modelAndView.addObject("bookingList", bookingList);
-
-        return modelAndView;
-
-    }
-
-
-
-    @PostMapping("/addNewBooking")
-    public String addNewBooking(Booking newBooking){
-        bookingService.save(newBooking);
-        return "redirect:/booking/findAll";
-    }
-
-    @PostMapping("/editBooking")
-    public String editBooking(@ModelAttribute Booking updatedBooking) {
-        bookingService.save(updatedBooking);
-        return "redirect:/booking/findAll";
-    }
 
 
 
