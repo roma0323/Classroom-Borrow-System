@@ -103,7 +103,7 @@
                         <!--td class="border-0 ">陳韋州</td-->
                         <!--td class="border-0"></td-->
                         <td class="border-0">
-                            <a class="custom-button" th:href="@{'/borrow/rejectBorrow?borrowId=' + ${borrow.id_borrow}}">拒絕</a>
+                            <a class="custom-button" th:href="@{'/borrow/deleteBorrow?borrowId=' + ${borrow.id_borrow}}">刪除</a>
                         </td>
                     </tr>
                     </tbody>
@@ -156,7 +156,7 @@
                             <span th:if="${borrowEquipment.returnby eq '已歸還'}" th:text="${borrow.timestamp}"></span>
                         </td>
                         <td class="border-0">
-                            <a class="custom-button" th:href="@{'/borrow/rejectBorrow?borrowId=' + ${borrow.id_borrow}}">拒絕</a>
+                            <a class="custom-button" th:href="@{'/borrow/deleteBorrow?borrowId=' + ${borrow.id_borrow}}">刪除</a>
                         </td>
                     </tr>
                     <!-- Additional rows as needed -->
