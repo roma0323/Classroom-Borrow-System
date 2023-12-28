@@ -29,7 +29,7 @@ public class calendarController {
         return "Ray/calendar/calendar"; // Return the name of the HTML file without the extension
     }
 
-    @GetMapping("/test")
+    @GetMapping("/calendar")
     public ModelAndView bookingDetail() {
         ModelAndView modelAndView = new ModelAndView("Ray/calendar/test_calendar");
         Iterable<Booking> bookingList = bookingService.findAll();
