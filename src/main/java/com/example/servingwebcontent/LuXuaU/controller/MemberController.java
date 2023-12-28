@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,7 +31,7 @@ public class MemberController {
 
     @GetMapping("/findAll")
     public ModelAndView findAll() {
-        ModelAndView modelAndView = new ModelAndView("LuXuaU/member/findAllMember");
+        ModelAndView modelAndView = new ModelAndView("LuXuaU/member/userList");
 
         // Retrieve data from MySQL and add it to the model
         Iterable<Member> memberList = memberService.findAll();
@@ -38,6 +39,10 @@ public class MemberController {
         return modelAndView;
     }
 
+    @GetMapping("/addNewMember")
+    public String addNewMember_get(Member newMember){
+        return "LuXuaU/member/addUser";
+    }
     @PostMapping("/addNewMember")
     public String addNewMember(Member newMember){
         memberService.save(newMember);
@@ -46,8 +51,11 @@ public class MemberController {
 
     @GetMapping("/resetPassword")
     public String resetPassword() {
-        return "LuXuaU/member/resetPassword";
+        return "LuXuaU/member/forgetPassword";
     }
+//    public String resetPassword() {
+//        return "LuXuaU/member/resetPassword";
+//    }
 
     @PostMapping("/resetPassword")
     public String resetPassword(@RequestParam String email) {
@@ -72,23 +80,43 @@ public class MemberController {
 
     @GetMapping("/editMember")
     public String editMemberForm() {
-        return "LuXuaU/member/editMember";
+        return "LuXuaU/member/changePassword";
     }
 
     @PostMapping("/editMember")
-    public String editMemberForm(@RequestParam String name, String identity, String password) {
+    public String editMemberForm(@RequestParam String oldPassword, String confirmPassword) {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         String memberEmail = authentication.getName();
         Member member = memberService.findByEmail(memberEmail);
-        Member updateMember = new Member(member.getId_member(), name, memberEmail, identity, password);
-        memberService.save(updateMember);
-        return "redirect:/";
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(oldPassword);
+
+        if(passwordEncoder.matches(oldPassword, encodedPassword)) {
+            Member updateMember = new Member(member.getId_member(), member.getName(), memberEmail, member.getIdentity(), confirmPassword);
+            memberService.save(updateMember);
+            return "redirect:/";
+        }
+        else{
+            System.out.println(member.getPassword());
+            System.out.println("password not correct!");
+            return "redirect:/member/editMember";
+        }
     }
 
     @PostMapping("/deleteMember")
     public String deleteMember(@RequestParam Long id_member) {
         memberService.deleteById(id_member);
+        return "redirect:/member/findAll";
+    }
+
+    @PostMapping("/changeMemberRole")
+    public String changeMemberRole(@RequestParam String email) {
+        Member member = memberService.findByEmail(email);
+        if(member.getIdentity().equals("ROLE_ADMIN")) member.setIdentity("ROLE_WORKER");
+        else member.setIdentity("ROLE_ADMIN");
+        memberService.save(member);
         return "redirect:/member/findAll";
     }
 }
