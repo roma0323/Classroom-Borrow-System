@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>設備借用紀錄</title>
+    <title>已歸還清單</title>
     <th:block th:include="head/head :: headerfiles"></th:block>
 </head>
 
@@ -18,10 +18,10 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>設備借用紀錄</h2>
+                <h2>已歸還清單</h2>
                 <ol>
                     <li>教室/設備借用</li>
-                    <li>設備借用紀錄</li>
+                    <li>已歸還清單</li>
                 </ol>
             </div>
         </div>
@@ -41,27 +41,24 @@
                         <th scope="col">系級</th>
                         <th scope="col">抵用證件</th>
                         <th scope="col">狀態</th>
-                        <th scope="col">歸還</th>
                         <th scope="col">詳細資料</th>
                     </tr>
                     </thead>
                     <!--這邊應該要丟參數吧？-->
                     <tbody>
-                    <tr th:each="borrowEquipment : ${borrowEList}">
-                        <th:block th:if="${borrowEquipment.equipment.category == category}">
-                            <th scope="row" class="align-middle" th:text="${borrowEquipmentStat.borrow.id_borrow}"></th>
-                            <td class="align-middle" th:text="${borrowEquipmentStat.borrow.timestamp}"></td>
-                            <td class="align-middle" th:text="${borrowEquipmentStat.borrow.name}"></td>
-                            <td class="align-middle" th:text="${borrowEquipmentStat.borrow.identity}"></td>
-                            <td class="align-middle" th:text="${borrowEquipmentStat.borrow.department_grade}"></td>
-                            <td class="align-middle" th:text="${borrowEquipmentStat.borrow.identitycard}"></td>
-                            <td class="align-middle" th:text="${borrowEquipmentStat.borrow.status}"></td>
-                            <td>
-                                <div class="d-flex justify-content-center">
-                                    <a type="add" class="btn btn-primary btn-sm custom-button" th:href="@{/borrow/borrowDetails/{id}(id=${borrow.id_borrow})}">查看詳細資料</a>
-                                </div>
-                            </td>
-                        </th:block>
+                    <tr th:each="borrow : ${borrowList}">
+                        <th scope="row" class="align-middle" th:text="${borrow.id_borrow}"></th>
+                        <td class="align-middle" th:text="${borrow.timestamp}"></td>
+                        <td class="align-middle" th:text="${borrow.name}"></td>
+                        <td class="align-middle" th:text="${borrow.identity}"></td>
+                        <td class="align-middle" th:text="${borrow.department_grade}"></td>
+                        <td class="align-middle" th:text="${borrow.identitycard}"></td>
+                        <td class="align-middle" th:text="${borrow.status}"></td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <a type="add" class="btn btn-primary btn-sm custom-button" th:href="@{/borrow/returnDetails/{id}(id=${borrow.id_borrow})}">查看詳細資料</a>
+                            </div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

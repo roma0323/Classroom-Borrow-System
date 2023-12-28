@@ -41,4 +41,8 @@ public class EquipmentService {
         return equipmentRepository.findDistinctCategories();
     }
 
+    public List<String> findLabelsByCategory(String category) {
+        return equipmentRepository.findLabelsByCategory(category);
+    }
+
 }
