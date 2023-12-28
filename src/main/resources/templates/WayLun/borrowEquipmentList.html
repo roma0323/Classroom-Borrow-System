@@ -56,9 +56,9 @@
                                     <td class="align-middle"><p th:text="${borrow.department_grade}"></p></td>
                                     <td>
                                         <div style="display: flex; align-items: center;">
-                                            <form th:action="@{/borrow/editBorrow}" method="get" style="margin-right: 10px;">
-                                                <input type="hidden" name="equipmentId" th:value="${borrow.id_borrow}">
-                                                <button type="submit" class="btn btn-primary btn-sm custom-button">編輯</button>
+                                            <form id="editForm" th:action="@{'/borrow/editBorrow'}" method="get">
+                                                <input type="hidden" name="borrowId" th:value="${borrow.id_borrow}">
+                                                <button type="button" class="custom-button ms-2" onclick="submitEditForm()">編輯</button>
                                             </form>
                                             <form th:action="@{/borrow/returnDetails/{id}(id=${borrow.id_borrow})}" method="get">
                                                 <input type="hidden" name="equipmentId" th:value="${borrow.id_borrow}">
@@ -86,6 +86,12 @@
 <script type="text/javascript" th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
 <script type="text/javascript" th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
 <script type="text/javascript" th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+<script>
+    function submitEditForm() {
+        document.getElementById('editForm').submit();
+    }
+</script>
 
 <!-- Template Main JS File -->
 <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
