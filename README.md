@@ -16,11 +16,12 @@ Welcome to the Classroom Borrow System! This project manages classroom equipment
 The Spring Boot project follows this structure:
 
 - **Java Files**:
-  - `SA_project/src/main/java/com/example/classroomborrowsystem/controller/`: Handles HTTP requests.
-  - `SA_project/src/main/java/com/example/classroomborrowsystem/model/`: Contains entity or model classes.
-  - `SA_project/src/main/java/com/example/classroomborrowsystem/repository/`: Manages repository interfaces for database operations.
-  - `SA_project/src/main/java/com/example/classroomborrowsystem/service/`: Holds service classes for business logic.
-  - `SA_project/src/main/java/com/example/classroomborrowsystem/`: Includes the main application class and necessary configurations.
+- com/example/servingwebcontent/Daniel/DanielGreetingController.java
+  - `SA_project/src/main/java/com/example/servingwebcontent/{develpo_user}/controller/`: Handles HTTP requests.
+  - `SA_project/src/main/java/com/example/servingwebcontent/{develpo_user}/model/`: Contains entity or model classes.
+  - `SA_project/src/main/java/com/example/servingwebcontent/{develpo_user}/repository/`: Manages repository interfaces for database operations.
+  - `SA_project/src/main/java/com/example/servingwebcontent/{develpo_user}/service/`: Holds service classes for business logic.
+  - `SA_project/src/main/java/com/example/servingwebcontent/`: Includes the main application class and necessary configurations.
 
 - **Resources**:
   - `SA_project/src/main/resources/`: Contains application properties, templates, static files, etc.
